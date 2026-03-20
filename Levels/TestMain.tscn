@@ -324,3 +324,4 @@ mesh = SubResource("BoxMesh_e47tw")
 [node name="Teleporter" parent="Platform" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.8065186, 0.78559875, 0)
 dest = NodePath("../../Stage/Obsti/CSGCylinder3D/Teleporter2")
+movingTeleporter = true

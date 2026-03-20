@@ -115,7 +115,9 @@ func _applyForce(force: Vector3):
 
 ## Teleport the player and change their velocity to reflect the new position
 ## This lacks a transformation of velocity and rotation on the y axis
-func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3):
+func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3, teleporterVelocity):
+	if !is_on_floor():
+		velocity = velocity - teleporterVelocity
 	var playerForward = transform.basis.z;
 	var vMag = velocity.length();
 	var vDir = velocity.normalized();
