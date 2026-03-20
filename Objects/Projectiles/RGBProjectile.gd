@@ -32,7 +32,7 @@ func save():
 		"dX" : direction.x,
 		"dY" : direction.y,
 		"dZ" : direction.z,
-		"speed" : speed
+		"speed" : speed,
 	}
 	return saveDict
 func loadMe(key: StringName, data) -> void:

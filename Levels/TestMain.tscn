@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://ctv16b4sekgqp" path="res://Levels/TestMain2.tscn" id="11_nyrd7"]
 [ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
+[ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatform.tscn" id="15_e47tw"]
+[ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqfas"]
 albedo_texture = ExtResource("2_oc3le")
@@ -58,6 +60,18 @@ sky = SubResource("Sky_s7ltb")
 ambient_light_sky_contribution = 0.1
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dk54w"]
+size = Vector3(5, 0.125, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc5o3"]
+albedo_texture = ExtResource("16_e47tw")
+uv1_scale = Vector3(-0.29, -0.29, -0.29)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_e47tw"]
+material = SubResource("StandardMaterial3D_sc5o3")
+size = Vector3(5, 0.125, 5)
 
 [node name="TestMain" type="Node3D" unique_id=347182156]
 script = ExtResource("1_s4r6r")
@@ -110,13 +124,9 @@ height = 0.1
 sides = 24
 material = SubResource("StandardMaterial3D_nwfg7")
 
-[node name="Teleporter" parent="Stage/Obsti/CSGCylinder3D" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.201, 7.9483376)
-dest = NodePath("../Teleporter2")
-
 [node name="Teleporter2" parent="Stage/Obsti/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 2.5, 11.603001, 2.5)
-dest = NodePath("../Teleporter")
+dest = NodePath("../../../../Platform/Teleporter")
 
 [node name="building" type="Node3D" parent="Stage" unique_id=704143688]
 
@@ -293,3 +303,24 @@ directional_shadow_max_distance = 220.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=424475211]
 environment = SubResource("Environment_iqfas")
+
+[node name="MovingPlatform" parent="." unique_id=1179728837 node_paths=PackedStringArray("platform") instance=ExtResource("15_e47tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
+target = Vector3(-20, 14, 52.492)
+startingPos = Vector3(-73.318, 14, 52.492)
+platform = NodePath("../Platform")
+
+[node name="Platform" type="AnimatableBody3D" parent="." unique_id=1817922644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
+collision_mask = 0
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=932385091]
+shape = SubResource("BoxShape3D_dk54w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform" unique_id=1519434917]
+mesh = SubResource("BoxMesh_e47tw")
+
+[node name="Teleporter" parent="Platform" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.8065186, 0.78559875, 0)
+dest = NodePath("../../Stage/Obsti/CSGCylinder3D/Teleporter2")

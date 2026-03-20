@@ -59,7 +59,6 @@ func saveGame():
 
 		# Store the save dictionary as a new line in the save file.
 		saveFile.store_line(jsonString)
-		print(nodeData)
 	print("saved game")
 
 func loadGame():
