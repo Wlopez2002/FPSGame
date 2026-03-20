@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c1sq3bu1cl5dw"]
+
+[ext_resource type="Script" uid="uid://bfkujvf56i54y" path="res://InteractiveAndNPC/Enemies/EnemyWalker.gd" id="1_4whi7"]
+[ext_resource type="PackedScene" uid="uid://ddsaee4vknn1u" path="res://Conponents/HitBox.tscn" id="2_7huy5"]
+[ext_resource type="PackedScene" uid="uid://cgvvmyrm706bt" path="res://Conponents/EntityComponent.tscn" id="3_n8d73"]
+[ext_resource type="AudioStream" uid="uid://dsobfavx3cdgk" path="res://Resources/Sounds/WeaponSounds/swinging.wav" id="4_n8d73"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4whi7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7huy5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s4ctg"]
+material = SubResource("StandardMaterial3D_7huy5")
+
+[sub_resource type="PrismMesh" id="PrismMesh_7huy5"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7huy5"]
+size = Vector3(1.7386475, 1.7139893, 1)
+
+[node name="Enemy" type="CharacterBody3D" unique_id=777159647 groups=["Persistent"]]
+collision_layer = 4
+collision_mask = 7
+floor_constant_speed = true
+script = ExtResource("1_4whi7")
+
+[node name="Body" type="CollisionShape3D" parent="." unique_id=767659941]
+shape = SubResource("CapsuleShape3D_4whi7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265757013]
+mesh = SubResource("CapsuleMesh_s4ctg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1726817162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9198853, -0.13779461)
+mesh = SubResource("PrismMesh_7huy5")
+
+[node name="HitBox" parent="." unique_id=1855202522 node_paths=PackedStringArray("tiedEntity") instance=ExtResource("2_7huy5")]
+collision_layer = 32
+tiedEntity = NodePath("../EntityComponent")
+
+[node name="Body" type="CollisionShape3D" parent="HitBox" unique_id=27291173]
+shape = SubResource("CapsuleShape3D_4whi7")
+
+[node name="EntityComponent" parent="." unique_id=1377202246 node_paths=PackedStringArray("nodeToFreeOnKill") instance=ExtResource("3_n8d73")]
+nodeToFreeOnKill = NodePath("..")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=425260606]
+
+[node name="EnemyAttack" type="Area3D" parent="." unique_id=1299217892]
+collision_layer = 0
+collision_mask = 48
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyAttack" unique_id=1150306511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.069)
+shape = SubResource("BoxShape3D_7huy5")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1108036748]
+wait_time = 0.5
+
+[node name="AttackPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1360128064]
+stream = ExtResource("4_n8d73")
+
+[connection signal="hit" from="EntityComponent" to="." method="_on_entity_component_hit"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

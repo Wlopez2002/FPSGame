@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b2ljfl5pygo3q"]
+
+[ext_resource type="Script" uid="uid://c0h2ccpbp1f1p" path="res://Objects/WorldObjects/HealthPickup.gd" id="1_prxnk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1w1bf"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmklp"]
+albedo_color = Color(0, 1, 0.24705882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k0yw1"]
+material = SubResource("StandardMaterial3D_fmklp")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="HealthPickup" type="Area3D" unique_id=220843905 groups=["Persistent"]]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_prxnk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1567539769]
+shape = SubResource("BoxShape3D_1w1bf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1736741344]
+mesh = SubResource("BoxMesh_k0yw1")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsgk5akpmbilf"
+path="res://.godot/imported/full run cycle example.wav-276354869a5bac473aeb7d8a54b447d5.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/MovementSounds/full run cycle example.wav"
+dest_files=["res://.godot/imported/full run cycle example.wav-276354869a5bac473aeb7d8a54b447d5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=2589
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dlfm0q6qu5paa"]
+
+[sub_resource type="Curve" id="Curve_u8lxm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5nxfn"]
+curve = SubResource("Curve_u8lxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u8lxm"]
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 247.81
+initial_velocity_max = 247.81
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_5nxfn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8lxm"]
+albedo_color = Color(1, 0, 0, 0.4392157)
+emission_enabled = true
+emission = Color(1, 1, 0.48235294, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u8lxm"]
+material = SubResource("StandardMaterial3D_u8lxm")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 100.0
+radial_segments = 4
+
+[node name="HitScanBulletShot" type="GPUParticles3D" unique_id=1801671218]
+transform = Transform3D(1.0000001, 0, 0, 0, -4.3711392e-08, -1, 0, 1.0000001, -4.371139e-08, 0, 0, 0)
+emitting = false
+amount = 1
+one_shot = true
+trail_lifetime = 0.01
+process_material = SubResource("ParticleProcessMaterial_u8lxm")
+draw_pass_1 = SubResource("CylinderMesh_u8lxm")

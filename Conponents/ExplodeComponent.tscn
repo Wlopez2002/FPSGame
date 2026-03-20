@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cucr2wuv0i501"]
+
+[ext_resource type="Script" uid="uid://cfi4d80nlo87b" path="res://Conponents/ExplodeComponent.gd" id="1_sawsn"]
+
+[node name="ExplodeComponent" type="Area3D" unique_id=1762912910]
+collision_layer = 0
+collision_mask = 54
+script = ExtResource("1_sawsn")

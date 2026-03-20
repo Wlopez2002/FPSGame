@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b7owd76wwuk2f"]
+
+[ext_resource type="Script" uid="uid://fvei8yh1fx43" path="res://Weapons/Pistol/Pistol.gd" id="1_wl3ew"]
+[ext_resource type="AudioStream" uid="uid://vp22mbf7clmw" path="res://Resources/Sounds/WeaponSounds/Pistol/674568__sertonin__9mm-handgun-being-dry-fired.wav" id="2_jb0rd"]
+[ext_resource type="AudioStream" uid="uid://bl7vqy2fdflhc" path="res://Resources/Sounds/WeaponSounds/Pistol/427592__michorvath__9mm-pistol-shot.wav" id="3_wbbrg"]
+[ext_resource type="PackedScene" uid="uid://dlfm0q6qu5paa" path="res://Resources/Effects/HitScanBulletShot.tscn" id="4_wbbrg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wl3ew"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.5)
+
+[node name="Pistol" type="Node3D" unique_id=1000285267]
+script = ExtResource("1_wl3ew")
+weaponName = "Pistol"
+myAmmoType = 1
+type = 1
+damage = 1
+attackSpeed = 0.5
+maxAmmo = 20
+
+[node name="AttackSpeedTimer" type="Timer" parent="." unique_id=346981399]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=143518287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57035804, -0.25661874, -0.515957)
+mesh = SubResource("BoxMesh_wl3ew")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1392272050]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 32
+collide_with_areas = true
+
+[node name="WeaponSounds" type="Node3D" parent="." unique_id=2100648261]
+
+[node name="PistolClickPlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=226792415]
+stream = ExtResource("2_jb0rd")
+max_db = -2.0
+
+[node name="PistolFirePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=1226033048]
+stream = ExtResource("3_wbbrg")
+volume_db = -10.0
+max_db = -4.0
+
+[node name="HitScanBulletShot" parent="." unique_id=1801671218 instance=ExtResource("4_wbbrg")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.5884094, -0.294374, -1.0158942)
+
+[connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]

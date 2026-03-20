@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://3lsl5ugt2sap"]
+
+[ext_resource type="Script" uid="uid://dixdkwyxuwdoh" path="res://Weapons/GrenadeLauncher/GrenadeLauncher.gd" id="1_cb41u"]
+[ext_resource type="AudioStream" uid="uid://vp22mbf7clmw" path="res://Resources/Sounds/WeaponSounds/Pistol/674568__sertonin__9mm-handgun-being-dry-fired.wav" id="2_k3jg6"]
+[ext_resource type="AudioStream" uid="uid://bn35h4j8nc41b" path="res://Resources/Sounds/WeaponSounds/SledgeHammer/Hammer hit No tin.wav" id="3_cb41u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjwfu"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cb41u"]
+material = SubResource("StandardMaterial3D_wl3ew")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.25
+
+[node name="GrenadeLauncher" type="Node3D" unique_id=1248248290]
+script = ExtResource("1_cb41u")
+weaponName = "Grenade Launcher"
+myAmmoType = 2
+type = 2
+attackSpeed = 1.0
+maxAmmo = 20
+metadata/_custom_type_script = "uid://b6bqtm7u8pqy4"
+
+[node name="AttackSpeedTimer" type="Timer" parent="." unique_id=357303520]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1295941936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57035804, -0.25661874, -0.515957)
+mesh = SubResource("BoxMesh_hjwfu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=859921623]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0005877018, -0.12635171, 0.14727122)
+mesh = SubResource("CylinderMesh_cb41u")
+
+[node name="WeaponSounds" type="Node3D" parent="." unique_id=19682234]
+
+[node name="clickPlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=396758458]
+stream = ExtResource("2_k3jg6")
+max_db = -2.0
+
+[node name="firePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=989055317]
+stream = ExtResource("3_cb41u")
+
+[connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]

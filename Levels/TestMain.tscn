@@ -1,0 +1,295 @@
+[gd_scene format=3 uid="uid://bky2tusb7a4pe"]
+
+[ext_resource type="Script" uid="uid://c7bjnwmwe6270" path="res://Levels/Level.gd" id="1_s4r6r"]
+[ext_resource type="Texture2D" uid="uid://dj8iwgmyi7wbm" path="res://Resources/Textures/Terrain_01-128x128.png" id="2_oc3le"]
+[ext_resource type="Texture2D" uid="uid://cseae2vbcexvf" path="res://Resources/Textures/Bricks_22-128x128.png" id="3_4oy1d"]
+[ext_resource type="Texture2D" uid="uid://6gmrvxwivjqo" path="res://Resources/Textures/Stone_06-128x128.png" id="4_nyrd7"]
+[ext_resource type="PackedScene" uid="uid://bsfwy2nu3h5pv" path="res://Objects/WorldObjects/Teleporter.tscn" id="5_nvuov"]
+[ext_resource type="Texture2D" uid="uid://bomggn12twluo" path="res://Resources/Textures/Grating_10-128x128.png" id="6_pru73"]
+[ext_resource type="PackedScene" uid="uid://jid42lhjm3ln" path="res://Objects/WorldObjects/AmmoPickup.tscn" id="7_dk54w"]
+[ext_resource type="PackedScene" uid="uid://bwr5lbfb4xekm" path="res://Player/Player.tscn" id="8_e47tw"]
+[ext_resource type="PackedScene" uid="uid://b2ljfl5pygo3q" path="res://Objects/WorldObjects/HealthPickup.tscn" id="9_pru73"]
+[ext_resource type="PackedScene" uid="uid://c1sq3bu1cl5dw" path="res://InteractiveAndNPC/Enemies/EnemyWalker.tscn" id="9_sc5o3"]
+[ext_resource type="PackedScene" uid="uid://c0sjm2t24o1t3" path="res://Objects/WorldObjects/LevelGate.tscn" id="10_4oy1d"]
+[ext_resource type="PackedScene" uid="uid://ctv16b4sekgqp" path="res://Levels/TestMain2.tscn" id="11_nyrd7"]
+[ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
+[ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqfas"]
+albedo_texture = ExtResource("2_oc3le")
+clearcoat = 0.1
+uv1_scale = Vector3(-0.275, -0.275, -0.275)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7ltb"]
+albedo_texture = ExtResource("3_4oy1d")
+normal_scale = -16.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwfg7"]
+albedo_texture = ExtResource("4_nyrd7")
+uv1_scale = Vector3(0.21, 0.21, 0.21)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aurg5"]
+albedo_texture = ExtResource("6_pru73")
+metallic = 1.0
+metallic_specular = 1.0
+uv1_scale = Vector3(0.21, 0.21, 0.21)
+uv1_triplanar = true
+uv1_world_triplanar = true
+stencil_flags = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvuov"]
+size = Vector3(6.703186, 8.758728, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iqfas"]
+sky_top_color = Color(0.3010017, 0.691379, 0.92622495, 1)
+sky_horizon_color = Color(0.64639777, 0.8477442, 0.98517627, 1)
+
+[sub_resource type="Sky" id="Sky_s7ltb"]
+sky_material = SubResource("ProceduralSkyMaterial_iqfas")
+
+[sub_resource type="Environment" id="Environment_iqfas"]
+background_mode = 2
+sky = SubResource("Sky_s7ltb")
+ambient_light_sky_contribution = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+
+[node name="TestMain" type="Node3D" unique_id=347182156]
+script = ExtResource("1_s4r6r")
+
+[node name="Stage" type="Node3D" parent="." unique_id=1084290395]
+
+[node name="Floor" type="CSGPolygon3D" parent="Stage" unique_id=1311385875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1700387, 6.208173, 95.49319)
+use_collision = true
+polygon = PackedVector2Array(-75.895, -10, -89.738, -1, -16.309, -1, -4.47, -6, 29.087, -6, 30.725723, -12.345289, -49.330868, -11.547039)
+depth = 170.0
+material = SubResource("StandardMaterial3D_iqfas")
+
+[node name="walls" type="CSGBox3D" parent="Stage" unique_id=131935522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.78418, 15.890564, -70.3535)
+use_collision = true
+size = Vector3(109.890625, 32.781128, 1)
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="walls" type="CSGBox3D" parent="Stage/walls" unique_id=219416493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 155.03906)
+size = Vector3(109.890625, 32.781128, 1)
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="walls2" type="CSGBox3D" parent="Stage/walls" unique_id=484490416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.33804, 0, 79.84211)
+size = Vector3(1.1983643, 32.781128, 171.75644)
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="walls3" type="CSGBox3D" parent="Stage/walls" unique_id=1555571311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.261032, 0, 79.84211)
+size = Vector3(1.1983643, 32.781128, 171.75644)
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="Obsti" type="Node3D" parent="Stage" unique_id=1886517075]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Obsti" unique_id=1986720322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.159424, -50)
+use_collision = true
+radius = 6.0
+height = 21.681152
+sides = 24
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Obsti/CSGCylinder3D" unique_id=1458394154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.803152, 0)
+use_collision = true
+radius = 5.9
+height = 0.1
+sides = 24
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="Teleporter" parent="Stage/Obsti/CSGCylinder3D" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.201, 7.9483376)
+dest = NodePath("../Teleporter2")
+
+[node name="Teleporter2" parent="Stage/Obsti/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 2.5, 11.603001, 2.5)
+dest = NodePath("../Teleporter")
+
+[node name="building" type="Node3D" parent="Stage" unique_id=704143688]
+
+[node name="Grate" type="Node3D" parent="Stage/building" unique_id=1301043093]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage/building/Grate" unique_id=504189964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.782757, 7.0944805, -22.721973)
+use_collision = true
+size = Vector3(7, 0.18, 58.679)
+material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Stage/building/Grate" unique_id=1064844539]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32.29149, 4.7945337, 8.127061)
+use_collision = true
+polygon = PackedVector2Array(-4.7855043, -1.5330722, 1.5135298, 2.38526, 3.6653328, 2.2995443, 3.9252644, -1.9366663)
+depth = 7.0
+material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stage/building/Grate" unique_id=991872436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.48313, 7.0944805, -48.62274)
+use_collision = true
+size = Vector3(45.69642, 0.18, 7)
+material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="Foundation" type="CSGBox3D" parent="Stage/building" unique_id=2040041973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.174816, 2.1790824, -62.065163)
+use_collision = true
+size = Vector3(52.25522, 10.014038, 20)
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="stairs1" type="Node3D" parent="Stage/building/Foundation" unique_id=1737472337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.034885, -2.1794176, -10.840294)
+
+[node name="stairs" type="CSGBox3D" parent="Stage/building/Foundation/stairs1" unique_id=356664072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.937626, 5.3535137, 5.113693)
+use_collision = true
+size = Vector3(7.3969727, 3.6621094, 6.450264)
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="steps" type="CSGBox3D" parent="Stage/building/Foundation/stairs1" unique_id=1264393053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.937626, 4.731016, 9.225407)
+size = Vector3(7.3969727, 2.4171143, 1.795475)
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stage/building/Foundation/stairs1/steps" unique_id=2021008639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06494808, -0.41456413)
+use_collision = true
+size = Vector3(7.3969727, 3.6621094, 0.96686554)
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Stage/building/Foundation/stairs1/steps" unique_id=1329722753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68744564, 0.79538345)
+use_collision = true
+size = Vector3(7.3969727, 2.4171143, 1.795475)
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="stare" type="CSGBox3D" parent="Stage/building/Foundation/stairs1" unique_id=339597610]
+transform = Transform3D(1, 0, 0, 0, 0.77733266, -0.6290898, 0, 0.6290898, 0.77733266, -4.937626, 4.9765396, 10.426918)
+visible = false
+use_collision = true
+size = Vector3(7.397, 1, 5.808)
+
+[node name="Teleporter" parent="Stage/building" unique_id=1635484343 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -79.717804, 7.9543943, -62.442825)
+dest = NodePath("../TeleporterTop")
+
+[node name="TeleporterTop" parent="Stage/building" unique_id=646360166 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.932205, 14.926445, 28.503647)
+dest = NodePath("../Teleporter")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage" unique_id=1173407252]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -81.41, 14, 55.691)
+use_collision = true
+size = Vector3(11.473145, 0.18, 58.679)
+material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="AmmoPick" type="Node3D" parent="Stage" unique_id=504904114]
+
+[node name="AmmoPickup" parent="Stage/AmmoPick" unique_id=1038737536 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6703796, 0.4581709, 5.4298553)
+type = 1
+
+[node name="AmmoPickup2" parent="Stage/AmmoPick" unique_id=232311525 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6982193, 0.45817375, 11.227386)
+type = 1
+
+[node name="AmmoPickup3" parent="Stage/AmmoPick" unique_id=1613060570 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.897077, 0.4581728, 11.586472)
+type = 1
+
+[node name="AmmoPickup4" parent="Stage/AmmoPick" unique_id=506528832 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5440319, 0.4581747, 8.255812)
+type = 1
+
+[node name="AmmoPickup5" parent="Stage/AmmoPick" unique_id=1448151812 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.21451, 14.447708, 39.786873)
+type = 2
+amount = 5
+
+[node name="AmmoPickup6" parent="Stage/AmmoPick" unique_id=251424451 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.419464, 14.447706, 42.470688)
+type = 2
+amount = 5
+
+[node name="AmmoPickup7" parent="Stage/AmmoPick" unique_id=1907861976 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.043655, 14.447707, 42.287144)
+type = 2
+amount = 5
+
+[node name="AmmoPickup8" parent="Stage/AmmoPick" unique_id=2009650690 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.3403, 14.447707, 46.91346)
+type = 2
+amount = 5
+
+[node name="healthPick" type="Node3D" parent="Stage" unique_id=1226955198]
+
+[node name="HealthPickup" parent="Stage/healthPick" unique_id=220843905 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8499174, 20.262577, -47.809933)
+
+[node name="HealthPickup2" parent="Stage/healthPick" unique_id=1954944577 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9206748, 20.262579, -50.517796)
+
+[node name="HealthPickup3" parent="Stage/healthPick" unique_id=483885202 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.012249, 20.262577, -49.70644)
+
+[node name="HealthPickup4" parent="Stage/healthPick" unique_id=1182981566 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3765326, 20.262577, -52.26904)
+
+[node name="HealthPickup5" parent="Stage/healthPick" unique_id=238054935 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73372173, 20.262577, -49.896034)
+
+[node name="HealthPickup6" parent="Stage/healthPick" unique_id=2014746458 instance=ExtResource("9_pru73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6842623, 20.262577, -53.58791)
+
+[node name="Enemy" parent="Stage" unique_id=777159647 instance=ExtResource("9_sc5o3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.01214, 6.2081757, 33.05358)
+
+[node name="LevelGate" parent="Stage" unique_id=1352570114 instance=ExtResource("10_4oy1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5353, 14.197708, 83.98384)
+toLevel = ExtResource("11_nyrd7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/LevelGate" unique_id=379001195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8143616, 4.273489, 0)
+shape = SubResource("BoxShape3D_nvuov")
+
+[node name="EnemyTurret" parent="Stage" unique_id=636541597 instance=ExtResource("13_nvuov")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -81.73682, 11.67418, -48.306385)
+
+[node name="Explosives" type="Node3D" parent="Stage" unique_id=1269749016]
+
+[node name="ExplosiveBarrel" parent="Stage/Explosives" unique_id=2059660201 instance=ExtResource("15_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.743305, 5.958172, -68.97518)
+
+[node name="ExplosiveBarrel2" parent="Stage/Explosives" unique_id=1285996894 instance=ExtResource("15_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.69422, 7.936104, -68.735954)
+
+[node name="ExplosiveBarrel3" parent="Stage/Explosives" unique_id=1357718049 instance=ExtResource("15_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.705006, 7.9361024, -69.092804)
+
+[node name="ExplosiveBarrel4" parent="Stage/Explosives" unique_id=880817633 instance=ExtResource("15_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.940247, 7.9361024, -68.08836)
+
+[node name="ExplosiveBarrel5" parent="Stage/Explosives" unique_id=1677347772 instance=ExtResource("15_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.149834, 9.436104, -68.68978)
+
+[node name="Player" parent="." unique_id=420592935 instance=ExtResource("8_e47tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1368498724]
+transform = Transform3D(0.7368291, -0.5992749, 0.3129737, 0, 0.46292475, 0.8863976, -0.67607903, -0.65312356, 0.34109643, 1.0145454, 103.100296, 231.67786)
+light_color = Color(1, 0.9822071, 1, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 220.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=424475211]
+environment = SubResource("Environment_iqfas")

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://u3dc03k1dyaa"]
+
+[ext_resource type="Script" uid="uid://pfocppat1qf2" path="res://Objects/Projectiles/Bullet.gd" id="1_ldt2v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldt2v"]
+size = Vector3(0.125, 0.125, 0.125)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mcyf7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_glxvt"]
+material = SubResource("StandardMaterial3D_mcyf7")
+size = Vector3(0.125, 0.125, 0.125)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mcyf7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ueh6e"]
+albedo_color = Color(1, 0.18039216, 0, 0.57254905)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mcyf7"]
+material = SubResource("StandardMaterial3D_ueh6e")
+size = Vector3(0.125, 0.125, 0.125)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mcyf7"]
+radius = 0.5577893
+
+[node name="Bullet" type="RigidBody3D" unique_id=656786027 groups=["Persistent"]]
+collision_layer = 0
+collision_mask = 49
+gravity_scale = 0.0
+continuous_cd = true
+linear_damp = 0.1
+angular_damp = 0.1
+script = ExtResource("1_ldt2v")
+speed = 60.0
+activateTimer = 0.05
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1559734222]
+shape = SubResource("BoxShape3D_ldt2v")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1809129965]
+mesh = SubResource("BoxMesh_glxvt")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1220837787]
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_mcyf7")
+draw_pass_1 = SubResource("BoxMesh_mcyf7")
+
+[node name="HitRange" type="Area3D" parent="." unique_id=1553827856]
+collision_layer = 0
+collision_mask = 49
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitRange" unique_id=660984151]
+shape = SubResource("SphereShape3D_mcyf7")
+
+[connection signal="area_entered" from="HitRange" to="." method="_on_hit_range_area_entered"]
+[connection signal="body_entered" from="HitRange" to="." method="_on_hit_range_body_entered"]

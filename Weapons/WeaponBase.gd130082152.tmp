@@ -1,0 +1,29 @@
+extends Node3D
+
+class_name WeaponBase
+
+enum WEAPONTYPE {MELEE, HITSCAN, PROJECTILE}
+enum AMMOTYPE {NONE, PISTOL}
+
+@export var weaponName: String
+@export var myAmmoType: AMMOTYPE;
+@export var type: WEAPONTYPE;
+@export var damage: int;
+@export var attackSpeed: float;
+@export var holdAttack = false;
+@export var maxAmmo: int = 0;
+
+var canAttack = true;
+var curAmmo: int = maxAmmo;
+
+func _attack(_playerBody: CharacterBody3D):
+	pass;
+
+func addAmmo(amount: int) -> int:
+	curAmmo += amount;
+	if curAmmo > maxAmmo:
+		var remain = curAmmo - maxAmmo;
+		curAmmo = maxAmmo;
+		return remain;
+	else:
+		return 0;

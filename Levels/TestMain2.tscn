@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ctv16b4sekgqp"]
+
+[ext_resource type="Script" uid="uid://c7bjnwmwe6270" path="res://Levels/Level.gd" id="1_oxfmg"]
+[ext_resource type="PackedScene" uid="uid://bwr5lbfb4xekm" path="res://Player/Player.tscn" id="2_21xi5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_21xi5"]
+sky_top_color = Color(0.3010017, 0.691379, 0.92622495, 1)
+sky_horizon_color = Color(0.64639777, 0.8477442, 0.98517627, 1)
+
+[sub_resource type="Sky" id="Sky_s7ltb"]
+sky_material = SubResource("ProceduralSkyMaterial_21xi5")
+
+[sub_resource type="Environment" id="Environment_66jgb"]
+background_mode = 2
+sky = SubResource("Sky_s7ltb")
+ambient_light_sky_contribution = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+
+[node name="TestMain2" type="Node3D" unique_id=386688808 node_paths=PackedStringArray("player")]
+script = ExtResource("1_oxfmg")
+player = NodePath("Player")
+
+[node name="Player" parent="." unique_id=420592935 instance=ExtResource("2_21xi5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0187845, 1.9457914, 2.7116833)
+
+[node name="stage" type="Node3D" parent="." unique_id=523530586]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stage" unique_id=571093426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17059326, 0, -2.982727)
+use_collision = true
+size = Vector3(16.819702, 1, 19.817749)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1220033030]
+transform = Transform3D(0.7368291, -0.5992749, 0.3129737, 0, 0.46292475, 0.8863976, -0.67607903, -0.65312356, 0.34109643, 1.0145454, 103.100296, 231.67786)
+light_color = Color(1, 0.9822071, 1, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 220.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1224620689]
+environment = SubResource("Environment_66jgb")

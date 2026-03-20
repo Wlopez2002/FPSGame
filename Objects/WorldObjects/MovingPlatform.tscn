@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://csvhwbpvhnfh7"]
+
+[ext_resource type="Script" uid="uid://bmfruvx2x502t" path="res://Objects/WorldObjects/MovingPlatform.gd" id="1_3ox1e"]
+
+[node name="(WIP) MovingPlatform" type="AnimatableBody3D" unique_id=617239945 groups=["Persistent"]]
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_3ox1e")

@@ -1,0 +1,26 @@
+extends Node3D
+
+class_name Teleporter
+
+@onready var teleArea = $Area3D;
+@onready var teleportPlayer: AudioStreamPlayer3D = $TeleportPlayer;
+
+## A teleporter may have a destination teleporter that
+## has a different destination
+@export var dest: Teleporter;
+var teleportedTo = false;
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if teleportedTo or !(body is PlayerBody):
+		return;
+	var player: PlayerBody = body;
+	var newPos = (player.global_position - global_position) + dest.global_position;
+	player._smoothTeleport(newPos, transform.basis.z, dest.transform.basis.z);
+	dest.teleportedTo = true;
+	dest.teleportPlayer.play();
+
+func _physics_process(_delta: float) -> void:
+	if teleportedTo == true:
+		var player: PlayerBody = get_tree().get_first_node_in_group("Player");
+		if player.global_position.distance_to(global_position) > 1.75:
+			teleportedTo = false;

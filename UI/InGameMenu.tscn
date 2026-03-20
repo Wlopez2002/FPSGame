@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://fvc0wjd0pifn"]
+
+[ext_resource type="Script" uid="uid://blw6hyb7vdm8t" path="res://UI/InGameMenu.gd" id="1_okm3a"]
+
+[node name="InGameMenu" type="CanvasLayer" unique_id=576491018]
+process_mode = 3
+script = ExtResource("1_okm3a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=405542114]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -50.5
+offset_right = 85.0
+offset_bottom = 50.5
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=918710515]
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="VBoxContainer" unique_id=1914302858]
+layout_mode = 2
+text = "Save
+"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=1600246340]
+layout_mode = 2
+text = "Load
+"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=34404862]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="PlayerKilledTimer" type="Timer" parent="." unique_id=999470758]
+one_shot = true
+
+[node name="Settings" type="VBoxContainer" parent="." unique_id=1091061773]
+offset_left = 750.0
+offset_top = 42.0
+offset_right = 1027.0
+offset_bottom = 85.0
+
+[node name="MSL" type="Label" parent="Settings" unique_id=451352571]
+layout_mode = 2
+text = "Mouse Sensitivity"
+
+[node name="MS" type="HSlider" parent="Settings" unique_id=943757245]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="VolL" type="Label" parent="Settings" unique_id=1109812261]
+layout_mode = 2
+text = "Sound Volume"
+
+[node name="Vol" type="HSlider" parent="Settings" unique_id=200382579]
+layout_mode = 2
+min_value = -20.0
+max_value = 0.0
+step = 0.5
+
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="PlayerKilledTimer" to="." method="_on_player_killed_timer_timeout"]
+[connection signal="drag_ended" from="Settings/MS" to="." method="_on_ms_drag_ended"]
+[connection signal="drag_ended" from="Settings/Vol" to="." method="_on_vol_drag_ended"]

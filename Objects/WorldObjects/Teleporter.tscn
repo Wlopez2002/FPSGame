@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bsfwy2nu3h5pv"]
+
+[ext_resource type="Script" uid="uid://crixbhckiu5r" path="res://Objects/WorldObjects/Teleporter.gd" id="1_k1fc8"]
+[ext_resource type="AudioStream" uid="uid://epsoqyuj5wa5" path="res://Resources/Sounds/hum.wav" id="2_q67cd"]
+[ext_resource type="AudioStream" uid="uid://ds4uuavxd6vx2" path="res://Resources/Sounds/375165__sgossner__zap-zap4.wav" id="3_0by1d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0by1d"]
+metallic = 1.0
+metallic_specular = 0.8
+roughness = 0.25
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jsni1"]
+material = SubResource("StandardMaterial3D_0by1d")
+top_radius = 0.075
+bottom_radius = 0.075
+height = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1fc8"]
+size = Vector3(0.08258057, 1.435257, 1.9137878)
+
+[node name="Teleporter" type="Node3D" unique_id=1867075382]
+script = ExtResource("1_k1fc8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=632440634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("CylinderMesh_jsni1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1026631547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("CylinderMesh_jsni1")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=803897150]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -0.25487503, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=702357693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25511932, 0)
+shape = SubResource("BoxShape3D_k1fc8")
+
+[node name="HumPlayer" type="AudioStreamPlayer3D" parent="." unique_id=597320805]
+stream = ExtResource("2_q67cd")
+attenuation_model = 1
+max_db = 0.0
+autoplay = true
+max_distance = 20.0
+
+[node name="TeleportPlayer" type="AudioStreamPlayer3D" parent="." unique_id=261939680]
+stream = ExtResource("3_0by1d")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
