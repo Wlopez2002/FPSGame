@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var explodeRange = $ExplodeRange;
-@onready var particles = $GPUParticles3D;
+@onready var particles = $ExplosionEffect;
 @onready var freeTimer = $FreeTimer;
 @onready var hitBox = $HitBox;
 @onready var CSGC = $CSGCylinder3D;

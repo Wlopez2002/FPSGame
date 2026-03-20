@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://20tv1wmnd45e" path="res://Objects/Projectiles/GlGrenade.gd" id="1_c8myi"]
 [ext_resource type="PackedScene" uid="uid://cucr2wuv0i501" path="res://Conponents/ExplodeComponent.tscn" id="2_82ck1"]
 [ext_resource type="AudioStream" uid="uid://pacpaa8a1dvc" path="res://Resources/Sounds/651532__h2p34__explode-1-small.wav" id="3_3u00x"]
+[ext_resource type="PackedScene" uid="uid://cuj6vhucasl81" path="res://Resources/Effects/Explosion.tscn" id="4_eclwt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3u00x"]
 bounce = 0.75
@@ -22,32 +23,6 @@ radius = 0.17353408
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_eclwt"]
 radius = 3.0768344
-
-[sub_resource type="Curve" id="Curve_a274a"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.3648649, 1), 0.0, 0.0, 0, 0, Vector2(0.62162167, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_8twtr"]
-curve = SubResource("Curve_a274a")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_stard"]
-particle_flag_align_y = true
-spread = 180.0
-initial_velocity_min = 12.0
-initial_velocity_max = 14.0
-scale_min = 0.5
-scale_curve = SubResource("CurveTexture_8twtr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80tuu"]
-albedo_color = Color(1, 0.69411767, 0, 1)
-emission_enabled = true
-emission = Color(0.93333334, 0.73333335, 0, 1)
-emission_energy_multiplier = 2.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_llfwl"]
-material = SubResource("StandardMaterial3D_80tuu")
-top_radius = 0.1
-bottom_radius = 0.0
 
 [node name="GlGrenade" type="RigidBody3D" unique_id=1665235577]
 collision_layer = 0
@@ -80,16 +55,6 @@ force = 10.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplodeRange" unique_id=62688543]
 shape = SubResource("SphereShape3D_eclwt")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=715046800]
-emitting = false
-amount = 24
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_stard")
-draw_pass_1 = SubResource("CylinderMesh_llfwl")
-
 [node name="FreeTimer" type="Timer" parent="." unique_id=497267663]
 one_shot = true
 
@@ -97,6 +62,8 @@ one_shot = true
 stream = ExtResource("3_3u00x")
 volume_db = -6.0
 max_db = -6.0
+
+[node name="ExplosionEffect" parent="." unique_id=1806831986 instance=ExtResource("4_eclwt")]
 
 [connection signal="area_entered" from="HitRange" to="." method="_on_hit_range_area_entered"]
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

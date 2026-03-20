@@ -4,38 +4,13 @@
 [ext_resource type="Script" uid="uid://k7e23hqqo2jt" path="res://InteractiveAndNPC/ExplosiveBarrel.gd" id="1_tu0cj"]
 [ext_resource type="AudioStream" uid="uid://pacpaa8a1dvc" path="res://Resources/Sounds/651532__h2p34__explode-1-small.wav" id="3_8twtr"]
 [ext_resource type="PackedScene" uid="uid://cucr2wuv0i501" path="res://Conponents/ExplodeComponent.tscn" id="4_hfu80"]
+[ext_resource type="PackedScene" uid="uid://cuj6vhucasl81" path="res://Resources/Effects/Explosion.tscn" id="5_80tuu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sexhv"]
 height = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tu0cj"]
 albedo_color = Color(0.67230505, 1.7688051e-06, 6.256998e-07, 1)
-
-[sub_resource type="Curve" id="Curve_tu0cj"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.66891897, 0.92134833), 0.0, 0.0, 0, 0, Vector2(0.9662162, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="CurveTexture" id="CurveTexture_8twtr"]
-curve = SubResource("Curve_tu0cj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hfu80"]
-particle_flag_align_y = true
-spread = 180.0
-initial_velocity_min = 12.0
-initial_velocity_max = 14.0
-scale_min = 0.5
-scale_curve = SubResource("CurveTexture_8twtr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80tuu"]
-albedo_color = Color(1, 0.69411767, 0, 1)
-emission_enabled = true
-emission = Color(0.93333334, 0.73333335, 0, 1)
-emission_energy_multiplier = 2.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_sjl54"]
-material = SubResource("StandardMaterial3D_80tuu")
-top_radius = 0.1
-bottom_radius = 0.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_80tuu"]
 radius = 2.8913715
@@ -61,16 +36,6 @@ material = SubResource("StandardMaterial3D_tu0cj")
 radius = 0.501
 height = 0.5
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=62573345]
-emitting = false
-amount = 24
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_hfu80")
-draw_pass_1 = SubResource("CylinderMesh_sjl54")
-
 [node name="FreeTimer" type="Timer" parent="." unique_id=1975705205]
 one_shot = true
 
@@ -85,6 +50,8 @@ force = 20.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplodeRange" unique_id=218163799]
 shape = SubResource("SphereShape3D_80tuu")
+
+[node name="ExplosionEffect" parent="." unique_id=1806831986 instance=ExtResource("5_80tuu")]
 
 [connection signal="HitSignal" from="HitBox" to="." method="_on_hit_box_hit_signal"]
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

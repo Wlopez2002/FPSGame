@@ -14,6 +14,8 @@ initial_velocity_min = 12.0
 initial_velocity_max = 14.0
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_8twtr")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80tuu"]
 albedo_color = Color(1, 0.69411767, 0, 1)
@@ -26,12 +28,51 @@ material = SubResource("StandardMaterial3D_80tuu")
 top_radius = 0.1
 bottom_radius = 0.0
 
+[sub_resource type="CurveTexture" id="CurveTexture_854xo"]
+
+[sub_resource type="Curve" id="Curve_854xo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10135135, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tfkdj"]
+curve = SubResource("Curve_854xo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tvevw"]
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 4, 0)
+scale_min = 0.0
+scale_max = 27.96
+scale_curve = SubResource("CurveTexture_tfkdj")
+emission_curve = SubResource("CurveTexture_854xo")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyr5n"]
+albedo_color = Color(0.31764707, 0.31764707, 0.31764707, 0.5019608)
+emission = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8mm2y"]
+material = SubResource("StandardMaterial3D_uyr5n")
+radius = 0.125
+height = 0.25
+
 [node name="ExplosionEffect" type="GPUParticles3D" unique_id=1806831986]
 emitting = false
 amount = 24
+sub_emitter = NodePath("GPUParticles3D")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_hfu80")
 draw_pass_1 = SubResource("CylinderMesh_sjl54")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=421088132]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tvevw")
+draw_pass_1 = SubResource("SphereMesh_8mm2y")

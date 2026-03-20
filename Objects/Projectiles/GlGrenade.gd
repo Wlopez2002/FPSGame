@@ -3,7 +3,7 @@ extends Projectile
 @onready var explodeComp = $ExplodeRange;
 @onready var freeTimer = $FreeTimer;
 @onready var audioPlayer = $AudioStreamPlayer3D;
-@onready var gpuPart = $GPUParticles3D;
+@onready var gpuPart = $ExplosionEffect;
 @onready var mesh = $MeshInstance3D;
 
 var exploded = false;
