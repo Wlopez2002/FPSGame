@@ -15,18 +15,17 @@ var stop = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if stop:
+		platform.velocity = Vector3.ZERO
 		return;
 	if goBack:
 		platform.velocity = (startingPos - target).normalized() * speed
 		if (platform.global_position - startingPos).length() <= speed * delta:
 			timer.start(pauseTime);
-			platform.velocity = Vector3.ZERO
 			stop = true;
 	else:
 		platform.velocity = (target - startingPos).normalized() * speed
 		if (platform.global_position - target).length() <= speed * delta:
 			timer.start(pauseTime);
-			platform.velocity = Vector3.ZERO
 			stop = true;
 
 func _on_pause_timer_timeout() -> void:
@@ -47,6 +46,8 @@ func save():
 		"tposY" : target.y,
 		"tposZ" : target.z,
 		"goBack" : goBack,
+		"pauseTime" : pauseTime,
+		"pauseTimeLeft" : timer.time_left,
 		"tiedBody" : platform.get_path()
 	}
 	return saveDict
@@ -66,6 +67,12 @@ func loadMe(key: StringName, data) -> void:
 			target.z = data
 		"goBack" :
 			goBack = data;
+		"pauseTime":
+			pauseTime = data;
+		"pauseTimeLeft":
+			if data > 0.0:
+				timer.start(data);
+				stop = true
 		"tiedBody":
 			platform = get_node(data)
 			platform.global_position = global_position
