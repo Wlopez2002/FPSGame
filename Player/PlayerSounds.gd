@@ -42,7 +42,7 @@ func _handleAudio():
 				if !loopMovePlayer.playing:
 					_stopAll()
 					loopMovePlayer.play();
-		elif playerBody.crouching and playerBody.velocity.length() > 6:
+		elif playerBody.crouching and playerBody.velocity.length() - playerBody.floorVelocity.length() > 6:
 			if !slideMovePlayer.playing:
 				_stopAll()
 				slideMovePlayer.play();

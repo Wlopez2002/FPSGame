@@ -63,7 +63,7 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dk54w"]
-size = Vector3(5, 0.125, 5)
+size = Vector3(5, 0.125, 12)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc5o3"]
 albedo_texture = ExtResource("16_e47tw")
@@ -72,7 +72,7 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_e47tw"]
 material = SubResource("StandardMaterial3D_sc5o3")
-size = Vector3(5, 0.125, 5)
+size = Vector3(5, 0.125, 12)
 
 [node name="TestMain" type="Node3D" unique_id=347182156]
 script = ExtResource("1_s4r6r")
@@ -315,9 +315,10 @@ platform = NodePath("../MovingPlatformBody")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 52.492)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatformBody" unique_id=932385091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.768982)
 shape = SubResource("BoxShape3D_dk54w")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatformBody" unique_id=1519434917]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatformBody/CollisionShape3D" unique_id=1519434917]
 mesh = SubResource("BoxMesh_e47tw")
 
 [node name="Teleporter" parent="MovingPlatformBody" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
