@@ -90,6 +90,7 @@ MoveCrouch={
 3d_physics/layer_5="PlayerHit"
 3d_physics/layer_6="NPCHit"
 3d_physics/layer_7="MovingPlatform"
+3d_physics/layer_8="Water"
 
 [physics]
 

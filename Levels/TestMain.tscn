@@ -38,6 +38,14 @@ albedo_texture = ExtResource("4_nyrd7")
 uv1_scale = Vector3(0.21, 0.21, 0.21)
 uv1_triplanar = true
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5yodq"]
+height = 20.0
+radius = 5.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4ln3"]
+transparency = 1
+albedo_color = Color(0, 0, 1, 0.5019608)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aurg5"]
 albedo_texture = ExtResource("6_pru73")
 metallic = 1.0
@@ -132,9 +140,9 @@ size = Vector3(1.1983643, 32.781128, 171.75644)
 material = SubResource("StandardMaterial3D_s7ltb")
 
 [node name="Pillar" type="Node3D" parent="Stage" unique_id=1886517075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.250502, -50.610123)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Pillar" unique_id=1986720322]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.159424, -50)
 use_collision = true
 radius = 6.0
 height = 21.681152
@@ -152,6 +160,51 @@ material = SubResource("StandardMaterial3D_nwfg7")
 [node name="Teleporter2" parent="Stage/Pillar/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 2.5, 11.603001, 2.5)
 dest = NodePath("../../../../MovingPlatformBody/Teleporter")
+
+[node name="WaterTower" type="Node3D" parent="Stage" unique_id=1739700235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.250502, -35.59305)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/WaterTower" unique_id=1659125351]
+use_collision = true
+radius = 6.0
+height = 21.681152
+sides = 24
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Stage/WaterTower/CSGCylinder3D" unique_id=1973428575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.803, 0)
+operation = 2
+use_collision = true
+radius = 5.9
+height = 0.1
+sides = 24
+material = SubResource("StandardMaterial3D_nwfg7")
+metadata/_edit_lock_ = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Stage/WaterTower/CSGCylinder3D" unique_id=2091753073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5075979, 0)
+operation = 2
+use_collision = true
+radius = 5.5
+height = 20.0
+sides = 24
+material = SubResource("StandardMaterial3D_nwfg7")
+
+[node name="Water" type="Area3D" parent="Stage/WaterTower" unique_id=1046719233]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/WaterTower/Water" unique_id=1993205716]
+shape = SubResource("CylinderShape3D_5yodq")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Stage/WaterTower/Water" unique_id=1275528356]
+use_collision = true
+collision_layer = 0
+collision_mask = 0
+radius = 5.5
+height = 20.0
+sides = 24
+material = SubResource("StandardMaterial3D_f4ln3")
 
 [node name="building" type="Node3D" parent="Stage" unique_id=704143688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -348,6 +401,7 @@ mesh = SubResource("BoxMesh_tlhpo")
 
 [node name="Player" parent="." unique_id=420592935 instance=ExtResource("8_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)
+maxDoubleJumps = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1368498724]
 transform = Transform3D(0.7410077, -0.6679749, 0.06868401, 0.078202605, 0.18743415, 0.9791592, -0.6669274, -0.72019315, 0.19112751, -26.08015, 103.100296, 59.58174)
@@ -360,7 +414,7 @@ environment = SubResource("Environment_iqfas")
 
 [node name="MovingPlatform" parent="." unique_id=1179728837 node_paths=PackedStringArray("platform") instance=ExtResource("15_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
-target = Vector3(2.2, 14, 50)
+target = Vector3(1.8, 14, 50)
 startingPos = Vector3(-73.318, 14, 50)
 platform = NodePath("../MovingPlatformBody")
 

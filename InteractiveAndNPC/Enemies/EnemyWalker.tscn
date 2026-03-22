@@ -12,11 +12,11 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s4ctg"]
 material = SubResource("StandardMaterial3D_7huy5")
 
-[sub_resource type="PrismMesh" id="PrismMesh_7huy5"]
-size = Vector3(0.5, 0.5, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_7huy5"]
 size = Vector3(1.7386475, 1.7139893, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_7huy5"]
+size = Vector3(0.5, 0.5, 1)
 
 [node name="Enemy" type="CharacterBody3D" unique_id=777159647 groups=["Persistent"]]
 collision_layer = 4
@@ -29,10 +29,6 @@ shape = SubResource("CapsuleShape3D_4whi7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265757013]
 mesh = SubResource("CapsuleMesh_s4ctg")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1726817162]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9198853, -0.13779461)
-mesh = SubResource("PrismMesh_7huy5")
 
 [node name="HitBox" parent="." unique_id=1855202522 node_paths=PackedStringArray("tiedEntity") instance=ExtResource("2_7huy5")]
 collision_layer = 32
@@ -59,6 +55,20 @@ wait_time = 0.5
 
 [node name="AttackPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1360128064]
 stream = ExtResource("4_n8d73")
+
+[node name="Head" type="Node3D" parent="." unique_id=1445602309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Head" unique_id=1726817162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.138)
+mesh = SubResource("PrismMesh_7huy5")
+
+[node name="CanHitCast" type="RayCast3D" parent="Head" unique_id=1611560079]
+target_position = Vector3(0, 0, -4)
+collision_mask = 17
+hit_from_inside = true
+hit_back_faces = false
+collide_with_areas = true
 
 [connection signal="hit" from="EntityComponent" to="." method="_on_entity_component_hit"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

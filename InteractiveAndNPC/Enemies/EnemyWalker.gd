@@ -1,9 +1,12 @@
 extends CharacterBody3D
 
 @onready var bodyMesh = $MeshInstance3D;
+@onready var hitBox: HitBox = $HitBox
 @onready var enemyAttack = $EnemyAttack;
 @onready var attackTimer = $AttackTimer;
 @onready var attackPlayer = $AttackPlayer;
+@onready var head = $Head;
+@onready var canHitCast = $Head/CanHitCast;
 
 const SPEED = 7.5
 var gravity = 15.0;
@@ -29,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 	look_at(player.global_position)
 	rotation.x = 0; rotation.z = 0;
+	head.look_at(player.global_position)
 	if redTimer > 0:
 		redTimer -= delta;
 		if redTimer <= 0:
@@ -50,6 +54,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide();
 
 func _attack():
+	canHitCast.force_raycast_update()
+	if canHitCast.is_colliding():
+		if !(canHitCast.get_collider() is HitBox):
+			return
+	else:
+		return
 	attackPlayer.play()
 	canAttack = false
 	for area in enemyAttack.get_overlapping_areas():
