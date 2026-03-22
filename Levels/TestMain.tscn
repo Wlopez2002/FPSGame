@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bwr5lbfb4xekm" path="res://Player/Player.tscn" id="8_e47tw"]
 [ext_resource type="PackedScene" uid="uid://b2ljfl5pygo3q" path="res://Objects/WorldObjects/HealthPickup.tscn" id="9_pru73"]
 [ext_resource type="PackedScene" uid="uid://c1sq3bu1cl5dw" path="res://InteractiveAndNPC/Enemies/EnemyWalker.tscn" id="9_sc5o3"]
-[ext_resource type="PackedScene" uid="uid://c0sjm2t24o1t3" path="res://Objects/WorldObjects/LevelGate.tscn" id="10_4oy1d"]
+[ext_resource type="PackedScene" uid="uid://c0sjm2t24o1t3" path="res://Objects/WorldRegions/LevelGate.tscn" id="10_4oy1d"]
 [ext_resource type="PackedScene" uid="uid://ctv16b4sekgqp" path="res://Levels/TestMain2.tscn" id="11_nyrd7"]
 [ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
+[ext_resource type="PackedScene" uid="uid://cxlun4wu7rpv7" path="res://Objects/WorldRegions/KillBox.tscn" id="14_mpofa"]
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
 [ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatformTop.tscn" id="15_e47tw"]
 [ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
@@ -47,6 +48,16 @@ stencil_flags = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nvuov"]
 size = Vector3(6.703186, 8.758728, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5yodq"]
+size = Vector3(12.258911, 7.5997314, 3.190918)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfrt1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tlhpo"]
+material = SubResource("StandardMaterial3D_xfrt1")
+size = Vector3(12.259, 7.6, 3.191)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iqfas"]
 sky_top_color = Color(0.3010017, 0.691379, 0.92622495, 1)
@@ -292,6 +303,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.940247, 7.9361024, -68.08
 
 [node name="ExplosiveBarrel5" parent="Stage/Explosives" unique_id=1677347772 instance=ExtResource("15_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.149834, 9.436104, -68.68978)
+
+[node name="Killboxes" type="Node3D" parent="Stage" unique_id=1612471219]
+
+[node name="KillBox" parent="Stage/Killboxes" unique_id=1100765962 instance=ExtResource("14_mpofa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.098795, -1.7206993, 81.83588)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Killboxes/KillBox" unique_id=1745945745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39312744, 3.2998657, 1.095459)
+shape = SubResource("BoxShape3D_5yodq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Killboxes/KillBox/CollisionShape3D" unique_id=1930002844]
+mesh = SubResource("BoxMesh_tlhpo")
 
 [node name="Player" parent="." unique_id=420592935 instance=ExtResource("8_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)

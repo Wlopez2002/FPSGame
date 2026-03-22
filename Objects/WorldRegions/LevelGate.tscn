@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0sjm2t24o1t3"]
 
-[ext_resource type="Script" uid="uid://dwbpl5w8mml14" path="res://Objects/WorldObjects/LevelGate.gd" id="1_dk7rg"]
+[ext_resource type="Script" uid="uid://dwbpl5w8mml14" path="res://Objects/WorldRegions/LevelGate.gd" id="1_dk7rg"]
 
 [node name="LevelGate" type="Area3D" unique_id=1352570114]
 collision_layer = 0

@@ -15,7 +15,6 @@ func _damage(num: int):
 	health -= num;
 	hit.emit();
 	if health <= 0:
-		killed.emit();
 		killMe();
 
 func heal(num: int) -> int:
@@ -28,5 +27,7 @@ func heal(num: int) -> int:
 		return 0;
 
 func killMe():
+	health = 0;
+	killed.emit();
 	if nodeToFreeOnKill != null:
 		nodeToFreeOnKill.call_deferred("queue_free")
