@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6gmrvxwivjqo" path="res://Resources/Textures/Stone_06-128x128.png" id="4_nyrd7"]
 [ext_resource type="PackedScene" uid="uid://bsfwy2nu3h5pv" path="res://Objects/WorldObjects/Teleporter.tscn" id="5_nvuov"]
 [ext_resource type="Texture2D" uid="uid://bomggn12twluo" path="res://Resources/Textures/Grating_10-128x128.png" id="6_pru73"]
+[ext_resource type="PackedScene" uid="uid://deaj8nayskvos" path="res://Objects/WorldRegions/ForcePushArea.tscn" id="7_5yodq"]
 [ext_resource type="PackedScene" uid="uid://jid42lhjm3ln" path="res://Objects/WorldObjects/AmmoPickup.tscn" id="7_dk54w"]
 [ext_resource type="PackedScene" uid="uid://bwr5lbfb4xekm" path="res://Player/Player.tscn" id="8_e47tw"]
 [ext_resource type="PackedScene" uid="uid://b2ljfl5pygo3q" path="res://Objects/WorldObjects/HealthPickup.tscn" id="9_pru73"]
@@ -46,6 +47,17 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 stencil_flags = 2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xfrt1"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlhpo"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.43529412)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f4ln3"]
+material = SubResource("StandardMaterial3D_tlhpo")
+size = Vector3(6, 1, 6)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_nvuov"]
 size = Vector3(6.703186, 8.758728, 1)
 
@@ -53,6 +65,7 @@ size = Vector3(6.703186, 8.758728, 1)
 size = Vector3(12.258911, 7.5997314, 3.190918)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfrt1"]
+transparency = 1
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tlhpo"]
@@ -118,9 +131,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.261032, 0, 79.84211)
 size = Vector3(1.1983643, 32.781128, 171.75644)
 material = SubResource("StandardMaterial3D_s7ltb")
 
-[node name="Obsti" type="Node3D" parent="Stage" unique_id=1886517075]
+[node name="Pillar" type="Node3D" parent="Stage" unique_id=1886517075]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Obsti" unique_id=1986720322]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Pillar" unique_id=1986720322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.159424, -50)
 use_collision = true
 radius = 6.0
@@ -128,7 +141,7 @@ height = 21.681152
 sides = 24
 material = SubResource("StandardMaterial3D_s7ltb")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Obsti/CSGCylinder3D" unique_id=1458394154]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage/Pillar/CSGCylinder3D" unique_id=1458394154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.803152, 0)
 use_collision = true
 radius = 5.9
@@ -136,7 +149,7 @@ height = 0.1
 sides = 24
 material = SubResource("StandardMaterial3D_nwfg7")
 
-[node name="Teleporter2" parent="Stage/Obsti/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+[node name="Teleporter2" parent="Stage/Pillar/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 2.5, 11.603001, 2.5)
 dest = NodePath("../../../../MovingPlatformBody/Teleporter")
 
@@ -159,9 +172,9 @@ depth = 7.0
 material = SubResource("StandardMaterial3D_aurg5")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Stage/building/Grate" unique_id=991872436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.48313, 7.0944805, -48.62274)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.793404, 7.0944805, -48.62274)
 use_collision = true
-size = Vector3(45.69642, 0.18, 7)
+size = Vector3(45.07587, 0.18, 7)
 material = SubResource("StandardMaterial3D_aurg5")
 
 [node name="Foundation" type="CSGBox3D" parent="Stage/building" unique_id=2040041973]
@@ -210,11 +223,27 @@ dest = NodePath("../TeleporterTop")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.932205, 15.319912, 28.503647)
 dest = NodePath("../Teleporter")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Stage" unique_id=1173407252]
+[node name="catwalk" type="CSGBox3D" parent="Stage" unique_id=1173407252]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -81.41, 14, 55.691)
 use_collision = true
 size = Vector3(11.473145, 0.18, 58.679)
 material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="catwalk2" type="CSGBox3D" parent="Stage" unique_id=584370019]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 10.445108, 14, 55.691)
+use_collision = true
+size = Vector3(11.473145, 0.18, 58.679)
+material = SubResource("StandardMaterial3D_aurg5")
+
+[node name="ForcePushArea" parent="Stage/catwalk2" unique_id=1504271704 instance=ExtResource("7_5yodq")]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, -13.291829, -32.426865)
+acceleration = Vector3(0, 3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/catwalk2/ForcePushArea" unique_id=1018240438]
+shape = SubResource("BoxShape3D_xfrt1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/catwalk2/ForcePushArea" unique_id=1078740692]
+mesh = SubResource("BoxMesh_f4ln3")
 
 [node name="AmmoPick" type="Node3D" parent="Stage" unique_id=504904114]
 
@@ -321,7 +350,7 @@ mesh = SubResource("BoxMesh_tlhpo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1368498724]
-transform = Transform3D(0.7368291, -0.5992749, 0.3129737, 0, 0.46292475, 0.8863976, -0.67607903, -0.65312356, 0.34109643, 1.0145454, 103.100296, 231.67786)
+transform = Transform3D(0.7410077, -0.6679749, 0.06868401, 0.078202605, 0.18743415, 0.9791592, -0.6669274, -0.72019315, 0.19112751, -26.08015, 103.100296, 59.58174)
 light_color = Color(1, 0.9822071, 1, 1)
 shadow_enabled = true
 directional_shadow_max_distance = 220.0
@@ -331,12 +360,12 @@ environment = SubResource("Environment_iqfas")
 
 [node name="MovingPlatform" parent="." unique_id=1179728837 node_paths=PackedStringArray("platform") instance=ExtResource("15_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
-target = Vector3(-20, 14, 52.492)
-startingPos = Vector3(-73.318, 14, 52.492)
+target = Vector3(2.2, 14, 50)
+startingPos = Vector3(-73.318, 14, 50)
 platform = NodePath("../MovingPlatformBody")
 
 [node name="MovingPlatformBody" parent="." unique_id=961236221 instance=ExtResource("16_sc5o3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 52.492)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatformBody" unique_id=932385091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.768982)
@@ -347,5 +376,5 @@ mesh = SubResource("BoxMesh_e47tw")
 
 [node name="Teleporter" parent="MovingPlatformBody" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.6966171, 0.79434586, 0)
-dest = NodePath("../../Stage/Obsti/CSGCylinder3D/Teleporter2")
+dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
 movingTeleporter = true
