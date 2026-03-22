@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
 [ext_resource type="PackedScene" uid="uid://cxlun4wu7rpv7" path="res://Objects/WorldRegions/KillBox.tscn" id="14_mpofa"]
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
-[ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatformTop.tscn" id="15_e47tw"]
+[ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatformController.tscn" id="15_e47tw"]
 [ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
 [ext_resource type="PackedScene" uid="uid://bcrxtrny8o5g" path="res://Objects/WorldObjects/MovingPlatformBody.tscn" id="16_sc5o3"]
 

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://csvhwbpvhnfh7"]
 
-[ext_resource type="Script" uid="uid://bmfruvx2x502t" path="res://Objects/WorldObjects/MovingPlatformTop.gd" id="1_3ox1e"]
+[ext_resource type="Script" uid="uid://bmfruvx2x502t" path="res://Objects/WorldObjects/MovingPlatformController.gd" id="1_3ox1e"]
 
-[node name="MovingPlatformTop" type="Node3D" unique_id=1179728837 groups=["Persistent"]]
+[node name="MovingPlatformController" type="Node3D" unique_id=1179728837 groups=["Persistent"]]
 script = ExtResource("1_3ox1e")
 
 [node name="PauseTimer" type="Timer" parent="." unique_id=1550928736]
