@@ -141,6 +141,7 @@ transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.
 dest = NodePath("../../../../MovingPlatformBody/Teleporter")
 
 [node name="building" type="Node3D" parent="Stage" unique_id=704143688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="Grate" type="Node3D" parent="Stage/building" unique_id=1301043093]
 
@@ -206,7 +207,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -79.
 dest = NodePath("../TeleporterTop")
 
 [node name="TeleporterTop" parent="Stage/building" unique_id=646360166 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.932205, 14.926445, 28.503647)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.932205, 15.319912, 28.503647)
 dest = NodePath("../Teleporter")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Stage" unique_id=1173407252]
@@ -293,16 +294,16 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -81.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.743305, 5.958172, -68.97518)
 
 [node name="ExplosiveBarrel2" parent="Stage/Explosives" unique_id=1285996894 instance=ExtResource("15_dk54w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.69422, 7.936104, -68.735954)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.69422, 7.284193, -68.735954)
 
 [node name="ExplosiveBarrel3" parent="Stage/Explosives" unique_id=1357718049 instance=ExtResource("15_dk54w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.705006, 7.9361024, -69.092804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.705006, 7.2841916, -69.092804)
 
 [node name="ExplosiveBarrel4" parent="Stage/Explosives" unique_id=880817633 instance=ExtResource("15_dk54w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.940247, 7.9361024, -68.08836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.940247, 7.2841916, -68.08836)
 
 [node name="ExplosiveBarrel5" parent="Stage/Explosives" unique_id=1677347772 instance=ExtResource("15_dk54w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.149834, 9.436104, -68.68978)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.149834, 8.784193, -68.68978)
 
 [node name="Killboxes" type="Node3D" parent="Stage" unique_id=1612471219]
 
