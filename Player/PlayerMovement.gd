@@ -25,7 +25,7 @@ var movementEnabled = true;
 var wasInAir = false;
 var gravity = 15.0;
 var friction = 4.0;
-var jumpImpulse = 6.0;
+var jumpImpulse = 8.0;
 var crouching = false;
 var tryUncrouch = false; 
 var doubleJumps = 0;
@@ -34,8 +34,7 @@ var dashGrace = 0.5;
 var canDash = true;
 var dashing = false; ## controls friction if on floor.
 
-var moveVelocity = Vector3.ZERO;
-var outsideVelocity = Vector3.ZERO;
+var naturalVelocity = Vector3.ZERO;
 var floorVelocity = Vector3.ZERO
 
 
@@ -100,24 +99,23 @@ func _updateVelocity(delta: float):
 	var wishDir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized();
 	
 	if is_on_floor() and !dashing:
-		moveVelocity = _applyFriction(moveVelocity, delta)
-		outsideVelocity = _applyFriction(outsideVelocity, delta)
+		naturalVelocity = _applyFriction(naturalVelocity, delta)
 		
 		if crouching:
 			_accelerate(wishDir, MAXCROUCHSPEED, delta);
 		else:
 			_accelerate(wishDir, MAXGROUNDSPEED, delta);
 	else:
-		moveVelocity.y -= gravity * delta
+		naturalVelocity.y -= gravity * delta
 		_accelerate(wishDir, MAXAIRSPEED, delta);
 	
 	## if the player is on a moving platform we need to add it's velocity
 	if is_on_floor():
-		if floorDetector.get_collider().is_in_group("MovingPlatform"):
+		if floorDetector.get_collider() is MovingPlatformBody:
 			floorVelocity = floorDetector.get_collider().velocity;
 		else:
 			floorVelocity = Vector3.ZERO
-	velocity = outsideVelocity + moveVelocity + floorVelocity;
+	velocity = naturalVelocity + floorVelocity;
 
 func _applyFriction(vel: Vector3, delta) -> Vector3:
 	if vel.length() != 0: ## the player is moving
@@ -133,13 +131,13 @@ func _applyFriction(vel: Vector3, delta) -> Vector3:
 	return vel;
 
 func _accelerate(wishDir: Vector3, maxVelocity: float, delta: float):
-	var curSpeed = moveVelocity.dot(wishDir);
+	var curSpeed = naturalVelocity.dot(wishDir);
 	var speedToAdd = clamp(maxVelocity - curSpeed, 0, MAXACCELERATION * delta);
-	moveVelocity += speedToAdd * wishDir;
+	naturalVelocity += speedToAdd * wishDir;
 
 func _applyForce(force: Vector3):
 	if movementEnabled:
-		outsideVelocity += force;
+		naturalVelocity += force;
 
 ## Teleport the player and change their velocity to reflect the new position
 ## This lacks a transformation of velocity and rotation on the y axis
@@ -148,20 +146,13 @@ func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3, 
 	global_position = newPos;
 	var playerForward = transform.basis.z;
 
-	var vDir = moveVelocity.normalized();
+	var vDir = naturalVelocity.normalized();
 	var rotations = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(vDir.x,vDir.z)) - PI
 	var newxz = Vector2(newForward.x,newForward.z).rotated(rotations)
-	var vNew = Vector3(newxz.x, vDir.y, newxz.y) * moveVelocity.length()
-	moveVelocity = vNew;
-	vDir = outsideVelocity.normalized();
-	rotations = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(vDir.x,vDir.z)) - PI
-	newxz = Vector2(newForward.x,newForward.z).rotated(rotations)
-	vNew = Vector3(newxz.x, vDir.y, newxz.y) * outsideVelocity.length()
-	outsideVelocity = vNew;
+	var vNew = Vector3(newxz.x, vDir.y, newxz.y) * naturalVelocity.length()
+	naturalVelocity = vNew;
 	
-	print(velocity)
-	print(moveVelocity + outsideVelocity)
-	velocity = moveVelocity + outsideVelocity + floorVelocity;
+	velocity =  naturalVelocity + floorVelocity;
 	
 	
 	## set the player's rotation

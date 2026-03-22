@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 	setLabels()
 
 func setLabels():
-	speedLabel.text = str(playerCharBody.velocity.length()) + "\n" + str(playerCharBody.velocity.normalized())
+	speedLabel.text = str(playerCharBody.velocity.length()) + "\n" + str(playerCharBody.velocity)
 	locationLabel.text = str(playerCharBody.global_position)
 	
 	var curWeapon: WeaponBase = playerWeapons.weaponsList.get(playerWeapons.heldWeapon);

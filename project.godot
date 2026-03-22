@@ -32,7 +32,6 @@ import/blender/enabled=false
 [global_group]
 
 Persistent=""
-MovingPlatform=""
 
 [input]
 
