@@ -41,7 +41,8 @@ func _playerKilled():
 	playerKilledTimer.start(1.0)
 
 func _on_player_killed_timer_timeout() -> void:
-	toggleMenu();
+	if menuUp == false:
+		toggleMenu();
 	disableSave = true;
 
 func _on_ms_drag_ended(_value_changed: bool) -> void:
