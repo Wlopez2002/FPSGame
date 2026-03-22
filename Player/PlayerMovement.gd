@@ -5,13 +5,13 @@ class_name PlayerBody
 @onready var headNode = $Head;
 @onready var bodyCol = $Body;
 @onready var uncrouchRay = $Uncrouch;
+@onready var dashTimer = $DashTimer;
+@onready var dashGraceTimer = $DashGraceTimer;
+@onready var waterDetector = $WaterDetector;
 
 ## only use this to check if the floor is something special
 ## do not use it to check if the player is grounded
 @onready var floorDetector = $FloorDetect;
-
-@onready var dashTimer = $DashTimer;
-@onready var dashGraceTimer = $DashGraceTimer;
 
 @export var maxDoubleJumps = 0;
 
@@ -52,11 +52,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MoveJump"):
 		if is_on_floor():
 			_applyForce(Vector3(0,jumpImpulse,0))
-		else:
-			if doubleJumps > 0:
-				velocity.y = 0;
-				_applyForce(Vector3(0,jumpImpulse,0))
-				doubleJumps -= 1;
+		#else:
+			#if doubleJumps > 0:
+				#velocity.y = 0;
+				#_applyForce(Vector3(0,jumpImpulse,0))
+				#doubleJumps -= 1;
 	if event.is_action_pressed("MoveCrouch"):
 		bodyCol.shape.height = 1.0;
 		crouching = true;
@@ -83,7 +83,10 @@ func _physics_process(delta: float) -> void:
 			tryUncrouch = false
 			bodyCol.shape.height = 2.0;
 	
-	_updateVelocity(delta)
+	if waterDetector.get_overlapping_areas():
+		_updateVelocityWater(delta)
+	else:
+		_updateVelocity(delta)
 	
 	if is_on_floor():
 		doubleJumps = maxDoubleJumps;
@@ -108,6 +111,25 @@ func _updateVelocity(delta: float):
 	else:
 		naturalVelocity.y -= gravity * delta
 		_accelerate(wishDir, MAXAIRSPEED, delta);
+	
+	## if the player is on a moving platform we need to add it's velocity
+	if is_on_floor():
+		if floorDetector.get_collider() is MovingPlatformBody:
+			floorVelocity = floorDetector.get_collider().velocity;
+		else:
+			floorVelocity = Vector3.ZERO
+	velocity = naturalVelocity + floorVelocity;
+
+func _updateVelocityWater(delta: float):
+	var input_dir := Vector2.ZERO
+	var headNodeBasis: Basis = headNode.transform.basis
+	if movementEnabled:
+		input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward");
+	var wishDir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized();
+	wishDir.y = (headNodeBasis * Vector3(input_dir.x, 0, input_dir.y)).normalized().y;
+	
+	naturalVelocity = _applyFriction(naturalVelocity, delta)
+	_accelerate(wishDir, MAXGROUNDSPEED, delta);
 	
 	## if the player is on a moving platform we need to add it's velocity
 	if is_on_floor():

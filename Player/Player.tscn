@@ -19,11 +19,14 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3qydi"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dm7nj"]
+
 [node name="Player" type="CharacterBody3D" unique_id=420592935 groups=["Persistent", "Player"]]
 collision_layer = 2
 floor_constant_speed = true
 platform_floor_layers = 4294967040
 script = ExtResource("1_3qydi")
+maxDoubleJumps = null
 
 [node name="Head" type="Node3D" parent="." unique_id=915858772]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -114,6 +117,13 @@ pitch_scale = 0.75
 stream = ExtResource("13_p7tob")
 volume_db = -2.0
 max_db = -2.0
+
+[node name="WaterDetector" type="Area3D" parent="." unique_id=2121344860]
+collision_layer = 0
+collision_mask = 128
+
+[node name="Body" type="CollisionShape3D" parent="WaterDetector" unique_id=1185548944]
+shape = SubResource("CapsuleShape3D_dm7nj")
 
 [connection signal="timeout" from="Head/Weapons/switchTimer" to="Head/Weapons" method="_on_switch_timer_timeout"]
 [connection signal="killed" from="EntityComponent" to="." method="_on_entity_component_killed"]
