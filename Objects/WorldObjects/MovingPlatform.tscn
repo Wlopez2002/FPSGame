@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://csvhwbpvhnfh7"]
-
-[ext_resource type="Script" uid="uid://bmfruvx2x502t" path="res://Objects/WorldObjects/MovingPlatform.gd" id="1_3ox1e"]
-
-[node name="MovingPlatform" type="Node3D" unique_id=1179728837 groups=["Persistent"]]
-script = ExtResource("1_3ox1e")

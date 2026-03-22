@@ -22,6 +22,7 @@
 [node name="Player" type="CharacterBody3D" unique_id=420592935 groups=["Persistent", "Player"]]
 collision_layer = 2
 floor_constant_speed = true
+platform_floor_layers = 4294967040
 script = ExtResource("1_3qydi")
 
 [node name="Head" type="Node3D" parent="." unique_id=915858772]
@@ -56,6 +57,9 @@ playerEntity = NodePath("../EntityComponent")
 
 [node name="Uncrouch" type="RayCast3D" parent="." unique_id=382785114]
 target_position = Vector3(0, 2, 0)
+
+[node name="FloorDetect" type="RayCast3D" parent="." unique_id=525362847]
+target_position = Vector3(0, -100, 0)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1273521177]
 anchors_preset = 8

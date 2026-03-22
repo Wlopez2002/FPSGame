@@ -32,6 +32,7 @@ import/blender/enabled=false
 [global_group]
 
 Persistent=""
+MovingPlatform=""
 
 [input]
 
@@ -89,6 +90,7 @@ MoveCrouch={
 3d_physics/layer_4="PlayerTeleportTrigger"
 3d_physics/layer_5="PlayerHit"
 3d_physics/layer_6="NPCHit"
+3d_physics/layer_7="MovingPlatform"
 
 [physics]
 

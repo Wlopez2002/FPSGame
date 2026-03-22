@@ -18,7 +18,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		return;
 	var player: PlayerBody = body;
 	var newPos = (player.global_position - global_position) + dest.global_position;
-	player._smoothTeleport(newPos, transform.basis.z, dest.transform.basis.z, assumedVelocity);
+	player._smoothTeleport(newPos, transform.basis.z, dest.transform.basis.z, assumedVelocity, dest.assumedVelocity);
 	dest.teleportedTo = true;
 	dest.teleportPlayer.play();
 

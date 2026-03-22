@@ -1,25 +1,38 @@
 extends Node3D
 
+@onready var timer = $PauseTimer;
+
 @export var target: Vector3 = Vector3.ZERO;
 @export var startingPos: Vector3;
 @export var speed: float = 10.0;
-@export var platform: AnimatableBody3D
+@export var platform: CharacterBody3D
+@export var pauseTime = 1
+
 
 var goBack = false;
+var stop = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if stop:
+		return;
 	if goBack:
-		platform.global_position += (startingPos - target).normalized() * speed * delta
-		global_position += (startingPos - target).normalized() * speed * delta
-		if (global_position - startingPos).length() <= speed * delta:
-			goBack = false
+		platform.velocity = (startingPos - target).normalized() * speed
+		if (platform.global_position - startingPos).length() <= speed * delta:
+			timer.start(pauseTime);
+			platform.velocity = Vector3.ZERO
+			stop = true;
 	else:
-		platform.global_position += (target - startingPos).normalized() * speed  * delta
-		global_position += (target - startingPos).normalized() * speed  * delta
-		if (global_position - target).length() <= speed * delta:
-			goBack = true
+		platform.velocity = (target - startingPos).normalized() * speed
+		if (platform.global_position - target).length() <= speed * delta:
+			timer.start(pauseTime);
+			platform.velocity = Vector3.ZERO
+			stop = true;
 
+func _on_pause_timer_timeout() -> void:
+	goBack = !goBack;
+	stop = false;
+	
 func save():
 	var saveDict = {
 		"filename" : get_scene_file_path(),
