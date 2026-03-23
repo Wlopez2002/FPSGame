@@ -14,19 +14,24 @@
 [ext_resource type="AudioStream" uid="uid://c3qlj3yaf2gs7" path="res://Resources/Sounds/MovementSounds/Run loop short.wav" id="10_v0k0e"]
 [ext_resource type="AudioStream" uid="uid://8cj1xhojt87b" path="res://Resources/Sounds/MovementSounds/slide.wav" id="11_v0k0e"]
 [ext_resource type="AudioStream" uid="uid://c3x1n3yfalxma" path="res://Resources/Sounds/MovementSounds/646661__sounddesignforyou__landing-on-the-ground-1.wav" id="13_p7tob"]
+[ext_resource type="AudioStream" uid="uid://hx6mmic35poj" path="res://Resources/Sounds/MovementSounds/enterWater.wav" id="15_7v5gs"]
+[ext_resource type="AudioStream" uid="uid://biaj50dy7vgw1" path="res://Resources/Sounds/MovementSounds/exitWater.wav" id="16_8sa4y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpjcp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3qydi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dm7nj"]
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7v5gs"]
+height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=420592935 groups=["Persistent", "Player"]]
 collision_layer = 2
 floor_constant_speed = true
 platform_floor_layers = 4294967040
 script = ExtResource("1_3qydi")
-maxDoubleJumps = null
 
 [node name="Head" type="Node3D" parent="." unique_id=915858772]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -118,12 +123,27 @@ stream = ExtResource("13_p7tob")
 volume_db = -2.0
 max_db = -2.0
 
+[node name="EnterWaterPlayer" type="AudioStreamPlayer3D" parent="PlayerSounds" unique_id=1087064785]
+stream = ExtResource("15_7v5gs")
+
+[node name="ExitWaterPlayer" type="AudioStreamPlayer3D" parent="PlayerSounds" unique_id=1966960264]
+stream = ExtResource("16_8sa4y")
+
 [node name="WaterDetector" type="Area3D" parent="." unique_id=2121344860]
 collision_layer = 0
 collision_mask = 128
 
 [node name="Body" type="CollisionShape3D" parent="WaterDetector" unique_id=1185548944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("CapsuleShape3D_dm7nj")
+
+[node name="WaterDetectorHead" type="Area3D" parent="." unique_id=1323944322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 128
+
+[node name="Body" type="CollisionShape3D" parent="WaterDetectorHead" unique_id=2011252837]
+shape = SubResource("CapsuleShape3D_7v5gs")
 
 [connection signal="timeout" from="Head/Weapons/switchTimer" to="Head/Weapons" method="_on_switch_timer_timeout"]
 [connection signal="killed" from="EntityComponent" to="." method="_on_entity_component_killed"]
@@ -133,3 +153,5 @@ shape = SubResource("CapsuleShape3D_dm7nj")
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashGraceTimer" to="." method="_on_dash_grace_timer_timeout"]
 [connection signal="finished" from="PlayerSounds/StartMovePlayer" to="PlayerSounds" method="_on_start_move_player_finished"]
+[connection signal="area_entered" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_entered"]
+[connection signal="area_exited" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_exited"]

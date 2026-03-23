@@ -33,6 +33,7 @@ var dashCoolDown = 1.5;
 var dashGrace = 0.5;
 var canDash = true;
 var dashing = false; ## controls friction if on floor.
+var isInWater = false;
 
 var naturalVelocity = Vector3.ZERO;
 var floorVelocity = Vector3.ZERO
@@ -50,7 +51,7 @@ func _input(event: InputEvent) -> void:
 	if !movementEnabled: ## anything past is controlled by movementEnabled
 		return;
 	if event.is_action_pressed("MoveJump"):
-		if is_on_floor():
+		if is_on_floor() or isInWater:
 			_applyForce(Vector3(0,jumpImpulse,0))
 		#else:
 			#if doubleJumps > 0:
@@ -84,8 +85,10 @@ func _physics_process(delta: float) -> void:
 			bodyCol.shape.height = 2.0;
 	
 	if waterDetector.get_overlapping_areas():
+		isInWater = true;
 		_updateVelocityWater(delta)
 	else:
+		isInWater = false;
 		_updateVelocity(delta)
 	
 	if is_on_floor():
@@ -129,6 +132,7 @@ func _updateVelocityWater(delta: float):
 	wishDir.y = (headNodeBasis * Vector3(input_dir.x, 0, input_dir.y)).normalized().y;
 	
 	naturalVelocity = _applyFriction(naturalVelocity, delta)
+	naturalVelocity.y -= gravity * delta
 	_accelerate(wishDir, MAXGROUNDSPEED, delta);
 	
 	## if the player is on a moving platform we need to add it's velocity

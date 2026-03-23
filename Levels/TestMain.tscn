@@ -46,15 +46,6 @@ radius = 5.5
 transparency = 1
 albedo_color = Color(0, 0, 1, 0.5019608)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aurg5"]
-albedo_texture = ExtResource("6_pru73")
-metallic = 1.0
-metallic_specular = 1.0
-uv1_scale = Vector3(0.21, 0.21, 0.21)
-uv1_triplanar = true
-uv1_world_triplanar = true
-stencil_flags = 2
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfrt1"]
 size = Vector3(6, 1, 6)
 
@@ -65,6 +56,15 @@ albedo_color = Color(0, 1, 1, 0.43529412)
 [sub_resource type="BoxMesh" id="BoxMesh_f4ln3"]
 material = SubResource("StandardMaterial3D_tlhpo")
 size = Vector3(6, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aurg5"]
+albedo_texture = ExtResource("6_pru73")
+metallic = 1.0
+metallic_specular = 1.0
+uv1_scale = Vector3(0.21, 0.21, 0.21)
+uv1_triplanar = true
+uv1_world_triplanar = true
+stencil_flags = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nvuov"]
 size = Vector3(6.703186, 8.758728, 1)
@@ -206,6 +206,16 @@ height = 20.0
 sides = 24
 material = SubResource("StandardMaterial3D_f4ln3")
 
+[node name="ForcePushArea" parent="Stage/WaterTower" unique_id=1504271704 instance=ExtResource("7_5yodq")]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, -8.542331, 8.867851)
+acceleration = Vector3(0, 3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/WaterTower/ForcePushArea" unique_id=1635582768]
+shape = SubResource("BoxShape3D_xfrt1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/WaterTower/ForcePushArea" unique_id=994337488]
+mesh = SubResource("BoxMesh_f4ln3")
+
 [node name="building" type="Node3D" parent="Stage" unique_id=704143688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
@@ -288,7 +298,7 @@ use_collision = true
 size = Vector3(11.473145, 0.18, 58.679)
 material = SubResource("StandardMaterial3D_aurg5")
 
-[node name="ForcePushArea" parent="Stage/catwalk2" unique_id=1504271704 instance=ExtResource("7_5yodq")]
+[node name="ForcePushArea" parent="Stage/catwalk2" unique_id=2034395081 instance=ExtResource("7_5yodq")]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, -13.291829, -32.426865)
 acceleration = Vector3(0, 3, 0)
 
@@ -401,7 +411,6 @@ mesh = SubResource("BoxMesh_tlhpo")
 
 [node name="Player" parent="." unique_id=420592935 instance=ExtResource("8_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)
-maxDoubleJumps = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1368498724]
 transform = Transform3D(0.7410077, -0.6679749, 0.06868401, 0.078202605, 0.18743415, 0.9791592, -0.6669274, -0.72019315, 0.19112751, -26.08015, 103.100296, 59.58174)

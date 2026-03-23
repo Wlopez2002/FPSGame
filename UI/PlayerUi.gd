@@ -5,10 +5,12 @@ extends CanvasLayer
 @onready var heldWeaponLabel = $VBoxContainer/HeldWeaponLabel;
 @onready var playerHealth = $HBoxContainer/HealthLabel;
 @onready var canDashLabel = $HBoxContainer/CanDashLabel;
-@onready var playerKilledColor = $ColorRect;
+@onready var playerKilledColor = $DeadRect;
+@onready var swimingRect = $SwimingRect;
+
 
 @export var playerWeapons: PlayerWeapon;
-@export var playerCharBody: CharacterBody3D;
+@export var playerCharBody: PlayerBody;
 @export var playerEntity: EntityComponent;
 
 func _process(_delta: float) -> void:
@@ -28,4 +30,11 @@ func setLabels():
 		canDashLabel.text = "";
 
 func _playerKilled():
+	swimingRect.visible = false;
 	playerKilledColor.visible = true;
+
+
+func _on_water_detector_head_area_entered(area: Area3D) -> void:
+	swimingRect.visible = true;
+func _on_water_detector_head_area_exited(area: Area3D) -> void:
+	swimingRect.visible = false;

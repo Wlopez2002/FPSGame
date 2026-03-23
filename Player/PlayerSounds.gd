@@ -6,10 +6,14 @@ extends Node3D
 @onready var loopMovePlayer = $loopMovePlayer;
 @onready var slideMovePlayer = $slideMovePlayer;
 @onready var hitGroundPlayer = $hitGroundPlayer;
+@onready var enterWaterPlayer = $EnterWaterPlayer;
+@onready var exitWaterPlayer = $ExitWaterPlayer;
 
 var playerMoving = false;
 var wasStill = true;
 var wasInAir = false;
+var waterChange = false;
+var waterLast = false;
 var playerMovingGrace = 0.1;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,10 +30,24 @@ func _process(delta: float) -> void:
 	if !playerBody.is_on_floor():
 		wasInAir = true;
 	
+	if playerBody.isInWater != waterLast:
+		waterChange = true;
+	
 	_handleAudio();
+	
+	waterLast = playerBody.isInWater
 
 func _handleAudio():
-	if playerBody.is_on_floor():
+	if waterChange:
+		waterChange = false;
+		if playerBody.isInWater:
+			if !enterWaterPlayer.playing and !exitWaterPlayer.playing:
+				enterWaterPlayer.play();
+		else:
+			if !enterWaterPlayer.playing and !exitWaterPlayer.playing:
+				exitWaterPlayer.play();
+	
+	if playerBody.is_on_floor() and !playerBody.isInWater:
 		if wasInAir:
 			wasInAir = false;
 			if !hitGroundPlayer.playing:

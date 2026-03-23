@@ -5,7 +5,16 @@
 [node name="PlayerUI" type="CanvasLayer" unique_id=1012757358]
 script = ExtResource("1_necun")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=215345469]
+[node name="SwimingRect" type="ColorRect" parent="." unique_id=774178085]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.004850617, 0.1837889, 0.815035, 0.3019608)
+
+[node name="DeadRect" type="ColorRect" parent="." unique_id=215345469]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
