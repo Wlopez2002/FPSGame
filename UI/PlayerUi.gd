@@ -34,7 +34,7 @@ func _playerKilled():
 	playerKilledColor.visible = true;
 
 
-func _on_water_detector_head_area_entered(area: Area3D) -> void:
+func _on_water_detector_head_area_entered(_area: Area3D) -> void:
 	swimingRect.visible = true;
-func _on_water_detector_head_area_exited(area: Area3D) -> void:
+func _on_water_detector_head_area_exited(_area: Area3D) -> void:
 	swimingRect.visible = false;
