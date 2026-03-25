@@ -26,6 +26,28 @@ func _input(event: InputEvent) -> void:
 				canSwitchWeapon = false;
 				switchTimer.start(0.1);
 				setHeld(heldWeapon - 1);
+	if event is InputEventKey and event.is_pressed():
+		match event.get_keycode_with_modifiers():
+			KEY_1:
+				setHeld(0);
+			KEY_2:
+				setHeld(1);
+			KEY_3:
+				setHeld(2);
+			KEY_4:
+				setHeld(3);
+			KEY_5:
+				setHeld(4);
+			KEY_6:
+				setHeld(5);
+			KEY_7:
+				setHeld(6);
+			KEY_8:
+				setHeld(7);
+			KEY_9:
+				setHeld(8);
+			KEY_0:
+				setHeld(9);
 	if event.is_action_pressed("M1"):
 		if weaponsList.get(heldWeapon) == null or weaponsList.size() <= heldWeapon:
 			print("ERROR: no weapon in weaponsList at heldWeapon = " + str(heldWeapon));
@@ -36,7 +58,11 @@ func _input(event: InputEvent) -> void:
 			print("ERROR: no weapon in weaponsList at heldWeapon = " + str(heldWeapon));
 			return;
 		weaponsList.get(heldWeapon)._attackReleased(playerBody);
+
 func setHeld(newIndex: int):
+	if newIndex >= weaponsList.size():
+		return;
+	
 	weaponsList.get(heldWeapon).visible = false;
 	weaponsList.get(heldWeapon)._switchedFrom();
 	heldWeapon = newIndex;
