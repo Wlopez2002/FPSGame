@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * GameData.MOUSESENSITIVITY)
 		headNode.rotate_x(-event.relative.y * GameData.MOUSESENSITIVITY)
-		headNode.rotation.x = clamp(headNode.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		headNode.rotation.x = clamp(headNode.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 	if !movementEnabled: ## anything past is controlled by movementEnabled
 		return;
@@ -170,16 +170,15 @@ func _applyForce(force: Vector3):
 func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3, teleporterVelocity, destVelocity):
 	## set player position
 	global_position = newPos;
-	var playerForward = transform.basis.z;
-
+	var playerForward = -headNode.global_transform.basis.z;
+	
 	var vDir = naturalVelocity.normalized();
-	var rotations = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(vDir.x,vDir.z)) - PI
+	var rotations = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(vDir.x,vDir.z))
 	var newxz = Vector2(newForward.x,newForward.z).rotated(rotations)
 	var vNew = Vector3(newxz.x, vDir.y, newxz.y) * naturalVelocity.length()
 	naturalVelocity = vNew;
 	
 	velocity =  naturalVelocity + floorVelocity;
-	
 	
 	## set the player's rotation
 	var relativeRot = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(playerForward.x,playerForward.z))
