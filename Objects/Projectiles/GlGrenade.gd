@@ -31,6 +31,9 @@ func _on_hit_range_area_entered(_area: Area3D) -> void:
 func _on_free_timer_timeout() -> void:
 	queue_free()
 
+func _on_hit_box_hit_signal() -> void:
+	detonate();
+
 func save():
 	var saveDict = {
 		"filename" : get_scene_file_path(),
