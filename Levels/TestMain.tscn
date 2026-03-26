@@ -442,3 +442,25 @@ mesh = SubResource("BoxMesh_e47tw")
 [node name="Teleporter" parent="MovingPlatformBody" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6966171, 0.79434586, 0)
 dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
+
+[node name="skybox" type="CSGBox3D" parent="." unique_id=1815681934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.78418, 65.766884, -70.3535)
+visible = false
+use_collision = true
+size = Vector3(109.890625, 84.21323, 1)
+
+[node name="walls" type="CSGBox3D" parent="skybox" unique_id=1837761408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 155.03906)
+size = Vector3(109.890625, 74.18048, 1)
+
+[node name="walls2" type="CSGBox3D" parent="skybox" unique_id=1397107523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.33804, 0, 79.84211)
+size = Vector3(1.1983643, 80.02191, 171.75644)
+
+[node name="walls3" type="CSGBox3D" parent="skybox" unique_id=58277771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.261032, 0, 79.84211)
+size = Vector3(1.1983643, 76.308655, 171.75644)
+
+[node name="roof" type="CSGBox3D" parent="skybox" unique_id=745945648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6380863, 35.6482, 78.12402)
+size = Vector3(122.183, 1, 170.61304)
