@@ -9,6 +9,7 @@ extends Node3D
 @onready var enterWaterPlayer = $EnterWaterPlayer;
 @onready var exitWaterPlayer = $ExitWaterPlayer;
 
+var playerKilled = false;
 var playerMoving = false;
 var wasStill = true;
 var wasInAir = false;
@@ -18,6 +19,9 @@ var playerMovingGrace = 0.1;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if playerKilled:
+		return
+	
 	var input_dir := Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward");
 	if input_dir:
 		playerMoving = true;
@@ -76,3 +80,7 @@ func _stopAll():
 
 func _on_start_move_player_finished() -> void:
 	wasStill = false;
+
+
+func _on_entity_component_killed() -> void:
+	playerKilled = true;
