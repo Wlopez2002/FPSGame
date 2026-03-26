@@ -377,7 +377,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5353, 14.197708, 83.98384
 toLevel = ExtResource("11_nyrd7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/LevelGate" unique_id=379001195]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8143616, 4.273489, 0)
 shape = SubResource("BoxShape3D_nvuov")
 
 [node name="EnemyTurret" parent="Stage" unique_id=636541597 instance=ExtResource("13_nvuov")]
@@ -443,4 +442,3 @@ mesh = SubResource("BoxMesh_e47tw")
 [node name="Teleporter" parent="MovingPlatformBody" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6966171, 0.79434586, 0)
 dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
-movingTeleporter = true

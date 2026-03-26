@@ -8,6 +8,7 @@
 size = Vector3(0.2, 0.2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qtfbb"]
+size = Vector3(1.0449829, 1.1918945, 1.0859375)
 
 [node name="EnemyTurret" type="Node3D" unique_id=636541597 groups=["Persistent"]]
 script = ExtResource("1_v5qfm")
@@ -45,6 +46,7 @@ tiedEntity = NodePath("../EntityComponent")
 metadata/_custom_type_script = "uid://cu3vscarvv63s"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=851063754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020446777, -0.095947266, 0.0029296875)
 shape = SubResource("BoxShape3D_qtfbb")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=745165184]

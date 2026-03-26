@@ -12,6 +12,10 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s4ctg"]
 material = SubResource("StandardMaterial3D_7huy5")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_28eq2"]
+radius = 0.58447266
+height = 2.0805664
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_7huy5"]
 size = Vector3(1.7386475, 1.7139893, 1)
 
@@ -37,7 +41,8 @@ collision_layer = 32
 tiedEntity = NodePath("../EntityComponent")
 
 [node name="Body" type="CollisionShape3D" parent="HitBox" unique_id=27291173]
-shape = SubResource("CapsuleShape3D_4whi7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040283203, 0)
+shape = SubResource("CapsuleShape3D_28eq2")
 
 [node name="EntityComponent" parent="." unique_id=1377202246 node_paths=PackedStringArray("nodeToFreeOnKill") instance=ExtResource("3_n8d73")]
 nodeToFreeOnKill = NodePath("..")
