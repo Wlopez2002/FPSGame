@@ -150,6 +150,7 @@ shape = SubResource("CapsuleShape3D_7v5gs")
 [connection signal="killed" from="EntityComponent" to="Head/Weapons" method="_on_entity_component_killed"]
 [connection signal="killed" from="EntityComponent" to="PlayerUI" method="_playerKilled"]
 [connection signal="killed" from="EntityComponent" to="InGameMenu" method="_playerKilled"]
+[connection signal="killed" from="EntityComponent" to="PlayerSounds" method="_on_entity_component_killed"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashGraceTimer" to="." method="_on_dash_grace_timer_timeout"]
 [connection signal="finished" from="PlayerSounds/StartMovePlayer" to="PlayerSounds" method="_on_start_move_player_finished"]

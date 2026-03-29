@@ -43,6 +43,6 @@ volume_db = -10.0
 max_db = -4.0
 
 [node name="HitScanBulletShot" parent="." unique_id=1801671218 instance=ExtResource("4_wbbrg")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.5884094, -0.294374, -1.0158942)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.05255556, -2.1678982)
 
 [connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]

@@ -115,6 +115,9 @@ func _updateVelocity(delta: float):
 		naturalVelocity.y -= gravity * delta
 		_accelerate(wishDir, MAXAIRSPEED, delta);
 	
+	if is_on_ceiling():
+		naturalVelocity.y = 0;
+	
 	## if the player is on a moving platform we need to add it's velocity
 	if is_on_floor():
 		if floorDetector.get_collider() is MovingPlatformBody:
