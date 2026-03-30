@@ -13,4 +13,5 @@ func interact():
 
 func _hit(damage: int):
 	if hitable:
+		HitSignal.emit(damage)
 		interact();
