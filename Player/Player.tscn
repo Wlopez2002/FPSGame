@@ -43,6 +43,7 @@ script = ExtResource("2_tok1r")
 weaponsList = [NodePath("SledgehammerWeapon"), NodePath("Pistol"), NodePath("GrenadeLauncher")]
 
 [node name="SledgehammerWeapon" parent="Head/Weapons" unique_id=1840920180 instance=ExtResource("4_8g4oa")]
+visible = false
 
 [node name="Pistol" parent="Head/Weapons" unique_id=1000285267 instance=ExtResource("5_6ysni")]
 visible = false
@@ -51,6 +52,15 @@ visible = false
 visible = false
 
 [node name="switchTimer" type="Timer" parent="Head/Weapons" unique_id=880121823]
+
+[node name="Interact" type="Node3D" parent="Head" unique_id=1625878300]
+
+[node name="InteractRay" type="RayCast3D" parent="Head/Interact" unique_id=1174803178]
+target_position = Vector3(0, 0, -2)
+collision_mask = 256
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Body" type="CollisionShape3D" parent="." unique_id=1753234003]
 shape = SubResource("CapsuleShape3D_kpjcp")

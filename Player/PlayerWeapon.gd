@@ -12,6 +12,9 @@ class_name PlayerWeapon
 var weaponsEnabled = true;
 var canSwitchWeapon = true;
 
+func _ready() -> void:
+	setHeld(heldWeapon)
+
 func _input(event: InputEvent) -> void:
 	if !weaponsEnabled:
 		return;

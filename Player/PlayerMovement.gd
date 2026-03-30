@@ -170,7 +170,9 @@ func _applyForce(force: Vector3):
 
 ## Teleport the player and change their velocity to reflect the new position
 ## This lacks a transformation of velocity and rotation on the y axis
-func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3):
+func _smoothTeleport(newPos: Vector3, oldBasis: Basis, newBasis: Basis):
+	var oldForward = -oldBasis.z;
+	var newForward = -newBasis.z;
 	## set player position
 	global_position = newPos;
 	var playerForward = -headNode.global_transform.basis.z;
@@ -182,11 +184,17 @@ func _smoothTeleport(newPos: Vector3, oldForward: Vector3, newForward: Vector3):
 	naturalVelocity = vNew;
 	
 	velocity =  naturalVelocity + floorVelocity;
+
 	
-	## set the player's rotation
 	var relativeRot = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(playerForward.x,playerForward.z))
 	var relativeForward = Vector2(newForward.x,newForward.z).rotated(relativeRot)
 	look_at(global_position + Vector3(relativeForward.x,0,relativeForward.y))
+
+func amgleDiff(no_1, no_2):
+	var angle = abs(no_1 - no_2)
+	if angle > PI/2:
+		return PI - angle
+	return angle
 
 func _on_dash_timer_timeout() -> void:
 	canDash = true;
