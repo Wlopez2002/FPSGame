@@ -472,7 +472,7 @@ dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
 
 [node name="InteractComponent" type="Area3D" parent="." unique_id=2091778529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.807403)
-collision_layer = 256
+collision_layer = 288
 collision_mask = 0
 script = ExtResource("20_xfrt1")
 metadata/_custom_type_script = "uid://ccucccdarx02v"
