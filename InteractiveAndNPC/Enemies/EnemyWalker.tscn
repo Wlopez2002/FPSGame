@@ -36,9 +36,8 @@ shape = SubResource("CapsuleShape3D_4whi7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=265757013]
 mesh = SubResource("CapsuleMesh_s4ctg")
 
-[node name="HitBox" parent="." unique_id=1855202522 node_paths=PackedStringArray("tiedEntity") instance=ExtResource("2_7huy5")]
+[node name="HitBox" parent="." unique_id=1855202522 instance=ExtResource("2_7huy5")]
 collision_layer = 32
-tiedEntity = NodePath("../EntityComponent")
 
 [node name="Body" type="CollisionShape3D" parent="HitBox" unique_id=27291173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040283203, 0)
@@ -77,5 +76,6 @@ hit_from_inside = true
 hit_back_faces = false
 collide_with_areas = true
 
+[connection signal="HitSignal" from="HitBox" to="EntityComponent" method="_damage"]
 [connection signal="hit" from="EntityComponent" to="." method="_on_entity_component_hit"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b2i8nqbfc1bsq" path="res://Weapons/Sledgehammer/SledgehammerWeapon.tscn" id="4_8g4oa"]
 [ext_resource type="PackedScene" uid="uid://b7owd76wwuk2f" path="res://Weapons/Pistol/Pistol.tscn" id="5_6ysni"]
 [ext_resource type="PackedScene" uid="uid://3lsl5ugt2sap" path="res://Weapons/GrenadeLauncher/GrenadeLauncher.tscn" id="5_dm7nj"]
+[ext_resource type="Script" uid="uid://d0if5v7xkdr0k" path="res://Player/PlayerInteract.gd" id="6_8sa4y"]
 [ext_resource type="Script" uid="uid://dqm0n2x300ibf" path="res://Player/PlayerHitBox.gd" id="7_s1rgi"]
 [ext_resource type="PackedScene" uid="uid://cgvvmyrm706bt" path="res://Conponents/EntityComponent.tscn" id="8_s1rgi"]
 [ext_resource type="Script" uid="uid://dbduyuj8nh1vx" path="res://Player/PlayerSounds.gd" id="9_5wa8t"]
@@ -54,13 +55,28 @@ visible = false
 [node name="switchTimer" type="Timer" parent="Head/Weapons" unique_id=880121823]
 
 [node name="Interact" type="Node3D" parent="Head" unique_id=1625878300]
+script = ExtResource("6_8sa4y")
 
 [node name="InteractRay" type="RayCast3D" parent="Head/Interact" unique_id=1174803178]
-target_position = Vector3(0, 0, -2)
-collision_mask = 256
+target_position = Vector3(0, 0, -3)
+collision_mask = 257
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
+
+[node name="InteractionLabel" type="Label" parent="Head/Interact" unique_id=258219493]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = 11.5
+offset_right = 31.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Activate"
+horizontal_alignment = 1
 
 [node name="Body" type="CollisionShape3D" parent="." unique_id=1753234003]
 shape = SubResource("CapsuleShape3D_kpjcp")
@@ -92,12 +108,12 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HitBox" type="Area3D" parent="." unique_id=1559858906 node_paths=PackedStringArray("playerWeapons", "tiedEntity")]
+[node name="HitBox" type="Area3D" parent="." unique_id=1559858906 node_paths=PackedStringArray("playerWeapons", "playerEntity")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("7_s1rgi")
 playerWeapons = NodePath("../Head/Weapons")
-tiedEntity = NodePath("../EntityComponent")
+playerEntity = NodePath("../EntityComponent")
 metadata/_custom_type_script = "uid://cu3vscarvv63s"
 
 [node name="Body" type="CollisionShape3D" parent="HitBox" unique_id=102691722]
@@ -156,6 +172,7 @@ collision_mask = 128
 shape = SubResource("CapsuleShape3D_7v5gs")
 
 [connection signal="timeout" from="Head/Weapons/switchTimer" to="Head/Weapons" method="_on_switch_timer_timeout"]
+[connection signal="HitSignal" from="HitBox" to="EntityComponent" method="_damage"]
 [connection signal="killed" from="EntityComponent" to="." method="_on_entity_component_killed"]
 [connection signal="killed" from="EntityComponent" to="Head/Weapons" method="_on_entity_component_killed"]
 [connection signal="killed" from="EntityComponent" to="PlayerUI" method="_playerKilled"]
