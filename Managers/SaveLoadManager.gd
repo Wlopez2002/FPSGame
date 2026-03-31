@@ -34,31 +34,44 @@ func _ready() -> void:
 func saveGame():
 	var saveFile = FileAccess.open("user://saves//savegame.save", FileAccess.WRITE)
 	var nodesToSave = get_tree().get_nodes_in_group("Persistent")
+	var nodesToSaveNRI = get_tree().get_nodes_in_group("PersistentNRI")
+	var nodeData: Array[Dictionary];
+	var nodeDataNRI: Array[Dictionary];
 	for node in nodesToSave:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
 			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
 			continue
-
 		# Check the node has a save function.
 		if !node.has_method("save"):
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
-
 		# Call the node's save function.
-		var nodeData = node.call("save")
-		
-		# construct the gamedata dict
-		var saveData = {
-		"CurrentLevel" : GameData.currentLevel.get_scene_file_path(),
-		"PersistantNodes": nodeData
-		}
+		nodeData.push_back(node.call("save"))
+	
+	# do the same for NRI nodes
+	for node in nodesToSaveNRI:
+		if node.scene_file_path.is_empty():
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+		if !node.has_method("save"):
+			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			continue
+		nodeDataNRI.push_back(node.call("save"))
+	
+	# construct the gamedata dict
+	var saveData = {
+	"CurrentLevel" : GameData.currentLevel.get_scene_file_path(),
+	"PersistantNodes": nodeData,
+	"PersistantNodesNRI" : nodeDataNRI
+	}
 
-		# JSON provides a static method to serialized JSON string.
-		var jsonString = JSON.stringify(saveData)
+	# JSON provides a static method to serialized JSON string.
+	var jsonString = JSON.stringify(saveData)
 
-		# Store the save dictionary as a new line in the save file.
-		saveFile.store_line(jsonString)
+	# Store the save dictionary as a new line in the save file.
+	saveFile.store_line(jsonString)
+
 	print("saved game")
 
 func loadGame():
@@ -86,21 +99,42 @@ func loadGame():
 		
 		saveData = json.data;
 		var nodeData = saveData["PersistantNodes"]
-		newData.push_back(nodeData);
-		var newObject = load(nodeData["filename"]).instantiate()
-		newObjects.push_back(newObject);
+		for data in nodeData:
+			newData.push_back(data);
+			var newObject = load(data["filename"]).instantiate()
+			newObjects.push_back(newObject);
 	
 	# load the level if needed
 	if GameData.currentLevel.get_scene_file_path() != saveData["CurrentLevel"]:
 		GameData.changeLevel(load(saveData["CurrentLevel"]))
 		print("changing Level")
 	
-	
 	loadPNodes(newObjects, newData)
+	loadPNRINodes(saveData["PersistantNodesNRI"])
 	
 	# clean up the load
 	menuNode.toggleMenu();
 	print("loaded game")
+
+## NRI nodes must be edited from existing nodes in the level
+## as they have children or signals that are disrupted by removing
+## and instancing new versions as loadPNodes does.
+func loadPNRINodes(newData):
+	var persistentNodes = get_tree().get_nodes_in_group("PersistentNRI")
+	for node in persistentNodes: ## Not good performance
+		for data in newData:
+			if str(node.get_path()) == data["identifier"]:
+				node.position = Vector3(data["posX"], data["posY"], data["posZ"])
+				for i in data.keys():
+					if i == "filename" or i == "parent":
+						continue
+					if i == "posX" or i == "posY" or i == "posZ":
+						continue
+					if node.has_method("loadMe"):
+						node.loadMe(i, data[i])
+					else:
+						print("Error: object was loaded but did not have loadMe")
+
 
 func loadPNodes(newObjects, newData):
 	## Remove persistent nodes from the level
