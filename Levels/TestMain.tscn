@@ -450,9 +450,11 @@ directional_shadow_max_distance = 220.0
 environment = SubResource("Environment_iqfas")
 
 [node name="MovingPlatform" parent="." unique_id=1179728837 instance=ExtResource("15_e47tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
-target = Vector3(1.8, 14, 50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
+target = Vector3(2.2, 14, 50)
 startingPos = Vector3(-73.318, 14, 50)
+active = false
+oneShot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatform" unique_id=932385091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037384033, 0, 1.2769814)

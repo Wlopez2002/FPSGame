@@ -21,19 +21,24 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector3.ZERO
 			return;
 		if goBack:
-			velocity = (startingPos - target).normalized() * speed
-			if (global_position - startingPos).length() <= speed * delta:
+			velocity = global_position.direction_to(startingPos).normalized() * speed
+			if global_position.distance_to(startingPos) <= speed * delta:
 				if !oneShot:
 					timer.start(pauseTime);
+					paused = true;
+				else:
+					active = false
 				goBack = !goBack;
-				paused = true;
+				
 		else:
-			velocity = (target - startingPos).normalized() * speed
-			if (global_position - target).length() <= speed * delta:
+			velocity = global_position.direction_to(target).normalized() * speed
+			if global_position.distance_to(target) <= speed * delta:
 				if !oneShot:
 					timer.start(pauseTime);
+					paused = true;
+				else:
+					active = false
 				goBack = !goBack;
-				paused = true;
 	else:
 		velocity = Vector3.ZERO
 	move_and_slide()
@@ -43,7 +48,6 @@ func _on_pause_timer_timeout() -> void:
 	paused = false;
 	
 func toggle():
-	print(active)
 	active = !active;
 	paused = false;
 	
