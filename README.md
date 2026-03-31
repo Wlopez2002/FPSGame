@@ -4,6 +4,7 @@ williamlopez011602@gmail.com
 
 TODO:
 	* Redo file structure.
+	* Save user settings
 	* Fix movement audio for sliding on moving platform
 	* projectile and enemy speed in water
 	* more enemies
