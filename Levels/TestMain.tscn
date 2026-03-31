@@ -16,9 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
 [ext_resource type="PackedScene" uid="uid://cxlun4wu7rpv7" path="res://Objects/WorldRegions/KillBox.tscn" id="14_mpofa"]
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
-[ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatformController.tscn" id="15_e47tw"]
+[ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatform.tscn" id="15_e47tw"]
 [ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
-[ext_resource type="PackedScene" uid="uid://bcrxtrny8o5g" path="res://Objects/WorldObjects/MovingPlatformBody.tscn" id="16_sc5o3"]
 [ext_resource type="Script" uid="uid://ccucccdarx02v" path="res://Conponents/InteractComponent.gd" id="20_xfrt1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqfas"]
@@ -167,7 +166,7 @@ material = SubResource("StandardMaterial3D_nwfg7")
 
 [node name="Teleporter2" parent="Stage/Pillar/CSGCylinder3D" unique_id=1414862267 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 2.5, 11.603001, 2.5)
-dest = NodePath("../../../../MovingPlatformBody/Teleporter")
+dest = NodePath("../../../../MovingPlatform/Teleporter")
 
 [node name="WaterTower" type="Node3D" parent="Stage" unique_id=1739700235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.250502, -35.59305)
@@ -450,38 +449,33 @@ directional_shadow_max_distance = 220.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=424475211]
 environment = SubResource("Environment_iqfas")
 
-[node name="MovingPlatform" parent="." unique_id=1179728837 node_paths=PackedStringArray("platform") instance=ExtResource("15_e47tw")]
+[node name="MovingPlatform" parent="." unique_id=1179728837 instance=ExtResource("15_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
 target = Vector3(1.8, 14, 50)
 startingPos = Vector3(-73.318, 14, 50)
-platform = NodePath("../MovingPlatformBody")
-active = false
 
-[node name="MovingPlatformBody" parent="." unique_id=961236221 instance=ExtResource("16_sc5o3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatformBody" unique_id=932385091]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.768982)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatform" unique_id=932385091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037384033, 0, 1.2769814)
 shape = SubResource("BoxShape3D_dk54w")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatformBody/CollisionShape3D" unique_id=1519434917]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatform/CollisionShape3D" unique_id=1519434917]
 mesh = SubResource("BoxMesh_e47tw")
 
-[node name="Teleporter" parent="MovingPlatformBody" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6966171, 0.79434586, 0)
+[node name="Teleporter" parent="MovingPlatform" unique_id=1867075382 node_paths=PackedStringArray("dest") instance=ExtResource("5_nvuov")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.696991, 0.79434586, -2.4920006)
 dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
 
-[node name="InteractComponent" type="Area3D" parent="MovingPlatformBody" unique_id=2091778529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 8.739616)
+[node name="InteractComponent" type="Area3D" parent="MovingPlatform" unique_id=2091778529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037384033, 0.5625, 6.247616)
 collision_layer = 288
 collision_mask = 0
 script = ExtResource("20_xfrt1")
 metadata/_custom_type_script = "uid://ccucccdarx02v"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatformBody/InteractComponent" unique_id=949254706]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatform/InteractComponent" unique_id=949254706]
 shape = SubResource("BoxShape3D_tlhpo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatformBody/InteractComponent" unique_id=1738106343]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatform/InteractComponent" unique_id=1738106343]
 mesh = SubResource("BoxMesh_6fnls")
 
-[connection signal="interacted" from="MovingPlatformBody/InteractComponent" to="MovingPlatform" method="toggle"]
+[connection signal="interacted" from="MovingPlatform/InteractComponent" to="MovingPlatform" method="toggle"]

@@ -120,7 +120,7 @@ func _updateVelocity(delta: float):
 	
 	## if the player is on a moving platform we need to add it's velocity
 	if is_on_floor():
-		if floorDetector.get_collider() is MovingPlatformBody:
+		if floorDetector.get_collider() is MovingPlatform:
 			floorVelocity = floorDetector.get_collider().velocity;
 		else:
 			floorVelocity = Vector3.ZERO
@@ -140,7 +140,7 @@ func _updateVelocityWater(delta: float):
 	
 	## if the player is on a moving platform we need to add it's velocity
 	if is_on_floor():
-		if floorDetector.get_collider() is MovingPlatformBody:
+		if floorDetector.get_collider() is MovingPlatform:
 			floorVelocity = floorDetector.get_collider().velocity;
 		else:
 			floorVelocity = Vector3.ZERO
@@ -184,7 +184,6 @@ func _smoothTeleport(newPos: Vector3, oldBasis: Basis, newBasis: Basis):
 	naturalVelocity = vNew;
 	
 	velocity =  naturalVelocity + floorVelocity;
-
 	
 	var relativeRot = Vector2(oldForward.x,oldForward.z).angle_to(Vector2(playerForward.x,playerForward.z))
 	var relativeForward = Vector2(newForward.x,newForward.z).rotated(relativeRot)

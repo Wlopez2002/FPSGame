@@ -1,11 +1,12 @@
-extends Node3D
+extends CharacterBody3D
+
+class_name MovingPlatform
 
 @onready var timer = $PauseTimer;
 
 @export var target: Vector3 = Vector3.ZERO;
 @export var startingPos: Vector3;
 @export var speed: float = 10.0;
-@export var platform: CharacterBody3D
 @export var pauseTime = 1
 @export var active = true
 @export var oneShot = false
@@ -17,24 +18,26 @@ var paused = false
 func _physics_process(delta: float) -> void:
 	if active:
 		if paused:
-			platform.velocity = Vector3.ZERO
+			velocity = Vector3.ZERO
 			return;
 		if goBack:
-			platform.velocity = (startingPos - target).normalized() * speed
-			if (platform.global_position - startingPos).length() <= speed * delta:
+			velocity = (startingPos - target).normalized() * speed
+			if (global_position - startingPos).length() <= speed * delta:
 				if !oneShot:
 					timer.start(pauseTime);
 				goBack = !goBack;
 				paused = true;
 		else:
-			platform.velocity = (target - startingPos).normalized() * speed
-			if (platform.global_position - target).length() <= speed * delta:
+			velocity = (target - startingPos).normalized() * speed
+			if (global_position - target).length() <= speed * delta:
 				if !oneShot:
 					timer.start(pauseTime);
 				goBack = !goBack;
 				paused = true;
 	else:
-		platform.velocity = Vector3.ZERO
+		velocity = Vector3.ZERO
+	move_and_slide()
+
 
 func _on_pause_timer_timeout() -> void:
 	paused = false;
@@ -46,11 +49,12 @@ func toggle():
 	
 func save():
 	var saveDict = {
+		"identifier": get_path(),
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"posX" : platform.global_position.x,
-		"posY" : platform.global_position.y,
-		"posZ" : platform.global_position.z,
+		"posX" : global_position.x,
+		"posY" : global_position.y,
+		"posZ" : global_position.z,
 		"sposX" : startingPos.x,
 		"sposY" : startingPos.y,
 		"sposZ" : startingPos.z,
@@ -61,7 +65,6 @@ func save():
 		"active" : active,
 		"pauseTime" : pauseTime,
 		"pauseTimeLeft" : timer.time_left,
-		"tiedBody" : platform.get_path()
 	}
 	return saveDict
 func loadMe(key: StringName, data) -> void:
@@ -88,6 +91,3 @@ func loadMe(key: StringName, data) -> void:
 			if data > 0.0:
 				timer.start(data);
 				paused = true
-		"tiedBody":
-			platform = get_node(data)
-			platform.global_position = global_position

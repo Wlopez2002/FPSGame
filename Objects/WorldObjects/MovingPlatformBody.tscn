@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://bcrxtrny8o5g"]
-
-[ext_resource type="Script" uid="uid://d2p47660dwega" path="res://Objects/WorldObjects/MovingPlatformBody.gd" id="1_v2o0p"]
-
-[node name="MovingPlatformBody" type="CharacterBody3D" unique_id=961236221 groups=["MovingPlatform"]]
-collision_mask = 0
-motion_mode = 1
-platform_floor_layers = 4294967040
-script = ExtResource("1_v2o0p")
