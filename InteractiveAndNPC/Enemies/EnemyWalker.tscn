@@ -17,7 +17,7 @@ radius = 0.58447266
 height = 2.0805664
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7huy5"]
-size = Vector3(1.7386475, 1.7139893, 1)
+size = Vector3(1.7386475, 1.7139893, 0.95910645)
 
 [sub_resource type="PrismMesh" id="PrismMesh_7huy5"]
 size = Vector3(0.5, 0.5, 1)
@@ -53,7 +53,7 @@ collision_layer = 0
 collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyAttack" unique_id=1150306511]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.069)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.0894468)
 shape = SubResource("BoxShape3D_7huy5")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1108036748]
