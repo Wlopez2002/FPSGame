@@ -23,7 +23,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func _ready() -> void:
 	lastPosition = global_position;
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if teleportedTo == true:
 		var player: PlayerBody = get_tree().get_first_node_in_group("Player");
 		if player.global_position.distance_to(global_position) > 1.75:

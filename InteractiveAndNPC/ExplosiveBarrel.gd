@@ -9,7 +9,7 @@ extends Node3D
 
 var alreadyHit = false;
 
-func _on_hit_box_hit_signal(dam) -> void:
+func _on_hit_box_hit_signal(_dam) -> void:
 	if alreadyHit:
 		return;
 	alreadyHit = true

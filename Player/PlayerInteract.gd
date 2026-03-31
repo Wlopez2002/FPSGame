@@ -8,7 +8,7 @@ func _input(event: InputEvent) -> void:
 		if interactRay.is_colliding() and interactRay.get_collider() is InteractComponent:
 			interactRay.get_collider().interact();
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if interactRay.is_colliding() and interactRay.get_collider() is InteractComponent:
 		interactionLabel.visible = true;
 	else:
