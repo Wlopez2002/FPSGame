@@ -455,6 +455,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.17438, 14, 52.492)
 target = Vector3(1.8, 14, 50)
 startingPos = Vector3(-73.318, 14, 50)
 platform = NodePath("../MovingPlatformBody")
+active = false
 
 [node name="MovingPlatformBody" parent="." unique_id=961236221 instance=ExtResource("16_sc5o3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
@@ -470,15 +471,17 @@ mesh = SubResource("BoxMesh_e47tw")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6966171, 0.79434586, 0)
 dest = NodePath("../../Stage/Pillar/CSGCylinder3D/Teleporter2")
 
-[node name="InteractComponent" type="Area3D" parent="." unique_id=2091778529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.807403)
+[node name="InteractComponent" type="Area3D" parent="MovingPlatformBody" unique_id=2091778529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 8.739616)
 collision_layer = 288
 collision_mask = 0
 script = ExtResource("20_xfrt1")
 metadata/_custom_type_script = "uid://ccucccdarx02v"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent" unique_id=949254706]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatformBody/InteractComponent" unique_id=949254706]
 shape = SubResource("BoxShape3D_tlhpo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractComponent" unique_id=1738106343]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatformBody/InteractComponent" unique_id=1738106343]
 mesh = SubResource("BoxMesh_6fnls")
+
+[connection signal="interacted" from="MovingPlatformBody/InteractComponent" to="MovingPlatform" method="toggle"]

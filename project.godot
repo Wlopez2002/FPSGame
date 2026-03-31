@@ -32,6 +32,7 @@ import/blender/enabled=false
 [global_group]
 
 Persistent=""
+PersistentNRI="Persistent No Re-Instance, a persistent node that must not have a new isntance created."
 
 [input]
 

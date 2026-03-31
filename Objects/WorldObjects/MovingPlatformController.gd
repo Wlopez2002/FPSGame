@@ -10,7 +10,6 @@ extends Node3D
 @export var active = true
 @export var oneShot = false
 
-
 var goBack = false;
 var paused = false
 
@@ -34,8 +33,15 @@ func _physics_process(delta: float) -> void:
 					timer.start(pauseTime);
 				goBack = !goBack;
 				paused = true;
+	else:
+		platform.velocity = Vector3.ZERO
 
 func _on_pause_timer_timeout() -> void:
+	paused = false;
+	
+func toggle():
+	print(active)
+	active = !active;
 	paused = false;
 	
 func save():
@@ -52,6 +58,7 @@ func save():
 		"tposY" : target.y,
 		"tposZ" : target.z,
 		"goBack" : goBack,
+		"active" : active,
 		"pauseTime" : pauseTime,
 		"pauseTimeLeft" : timer.time_left,
 		"tiedBody" : platform.get_path()
@@ -71,8 +78,10 @@ func loadMe(key: StringName, data) -> void:
 			target.y = data
 		"tposZ":
 			target.z = data
-		"goBack" :
+		"goBack":
 			goBack = data;
+		"active":
+			active = data;
 		"pauseTime":
 			pauseTime = data;
 		"pauseTimeLeft":
