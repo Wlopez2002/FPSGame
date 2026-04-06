@@ -17,18 +17,5 @@ func changeLevel(level: PackedScene):
 
 	get_tree().root.add_child(newLevel)
 	var player: PlayerBody = get_tree().get_first_node_in_group("Player")
-	print(player)
 	for key in playerData:
 		player.loadIntoNewLevel(key, playerData[key])
-
-func save():
-	var saveDict = {
-		"MOUSESENSITIVITY" : MOUSESENSITIVITY
-	}
-	return saveDict
-func loadMe(key: StringName, data) -> void:
-	print(key)
-	print(data)
-	match key:
-		"MOUSESENSITIVITY":
-			MOUSESENSITIVITY = data;

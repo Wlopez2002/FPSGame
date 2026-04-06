@@ -9,6 +9,9 @@ var disableSave = false;
 
 func _ready() -> void:
 	SaveLoadManager.menuNode = self
+	SaveLoadManager.loadSettings();
+	MouseSensSlider.value = GameData.MOUSESENSITIVITY/GameData.MOUSESENSITIVITYBASE
+	VolumeSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ESC"):
@@ -20,11 +23,13 @@ func toggleMenu():
 		menuUp = false;
 		visible = false;
 		get_tree().paused = false;
+		SaveLoadManager.saveSettings();
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
 		menuUp = true;
 		visible = true;
 		get_tree().paused = true;
+		SaveLoadManager.loadSettings();
 
 
 func _on_resume_button_pressed() -> void:
@@ -35,6 +40,7 @@ func _on_save_button_pressed() -> void:
 func _on_load_button_pressed() -> void:
 	SaveLoadManager.loadGame();
 func _on_quit_button_pressed() -> void:
+	SaveLoadManager.saveSettings();
 	get_tree().quit();
 
 func _playerKilled():

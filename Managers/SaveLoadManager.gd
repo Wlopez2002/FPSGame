@@ -7,29 +7,40 @@ func _ready() -> void:
 		var dir = DirAccess.open("user://")
 		dir.make_dir("saves")
 
-#func saveSettings():
-	#var saveFile = FileAccess.open("user://settings", FileAccess.WRITE)
-	#var jsonString = JSON.stringify(GameData.save())
-	#saveFile.store_line(jsonString)
+func saveSettings():
+	var saveFile = FileAccess.open("user://settings", FileAccess.WRITE)
+	
+	var saveDict = {
+		"MOUSESENSITIVITY" : GameData.MOUSESENSITIVITY,
+		"MASTERVOLUME" : AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	}
+	
+	var jsonString = JSON.stringify(saveDict)
+	saveFile.store_line(jsonString)
 
-#func loadSettings():
-	#if not FileAccess.file_exists("user://settings"):
-		#return
-	#
-	#var saveFile = FileAccess.open("user://settings", FileAccess.READ)
-	#var json = JSON.new()
-	#while saveFile.get_position() < saveFile.get_length():
-		#var jsonString = saveFile.get_line()
-		#
-		## Check if there is any error while parsing the JSON string, skip in case of failure.
-		#var parsedResults = json.parse(jsonString)
-		#if not parsedResults == OK:
-			#print("JSON Parse Error: ", json.get_error_message(), " in ", jsonString, " at line ", json.get_error_line())
-			#continue
-		#
-	#var SettingsData: Dictionary = json.data;
-	#for key in SettingsData:
-		#GameData.loadMe(key, SettingsData[key])
+func loadSettings():
+	if not FileAccess.file_exists("user://settings"):
+		return
+	
+	var saveFile = FileAccess.open("user://settings", FileAccess.READ)
+	var json = JSON.new()
+	while saveFile.get_position() < saveFile.get_length():
+		var jsonString = saveFile.get_line()
+		
+		# Check if there is any error while parsing the JSON string, skip in case of failure.
+		var parsedResults = json.parse(jsonString)
+		if not parsedResults == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", jsonString, " at line ", json.get_error_line())
+			continue
+		
+	var SettingsData: Dictionary = json.data;
+	for key in SettingsData:
+		var data = SettingsData[key]
+		match key:
+			"MOUSESENSITIVITY":
+				GameData.MOUSESENSITIVITY = data;
+			"MASTERVOLUME": 
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data)
 
 func saveGame():
 	var saveFile = FileAccess.open("user://saves//savegame.save", FileAccess.WRITE)
