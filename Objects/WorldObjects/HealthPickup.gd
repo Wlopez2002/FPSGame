@@ -1,4 +1,4 @@
-extends Pickip
+extends Pickup
 
 @export var amount: int = 10;
 

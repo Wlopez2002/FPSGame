@@ -1,4 +1,4 @@
-extends Pickip
+extends Pickup
 
 @export var type: WeaponBase.AMMOTYPE;
 @export var amount: int = 10;

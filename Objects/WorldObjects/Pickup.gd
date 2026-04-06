@@ -1,3 +1,3 @@
 extends Area3D
 
-class_name Pickip
+class_name Pickup
