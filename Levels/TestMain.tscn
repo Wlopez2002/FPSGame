@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
 [ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatform.tscn" id="15_e47tw"]
 [ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
+[ext_resource type="PackedScene" uid="uid://co3likvlt573g" path="res://Conponents/ThingEmitter.tscn" id="20_tlhpo"]
 [ext_resource type="Script" uid="uid://ccucccdarx02v" path="res://Conponents/InteractComponent.gd" id="20_xfrt1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqfas"]
@@ -480,4 +481,24 @@ directional_shadow_max_distance = 220.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=424475211]
 environment = SubResource("Environment_iqfas")
 
+[node name="Node3D" type="Node3D" parent="." unique_id=661547622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, 2.2520137)
+
+[node name="ThingEmitter" parent="Node3D" unique_id=1833471045 instance=ExtResource("20_tlhpo")]
+scene = ExtResource("9_sc5o3")
+spawnLocation = Vector3(12, 2, 2)
+
+[node name="InteractComponent" type="Area3D" parent="Node3D" unique_id=1888922370]
+collision_layer = 288
+collision_mask = 0
+script = ExtResource("20_xfrt1")
+metadata/_custom_type_script = "uid://ccucccdarx02v"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/InteractComponent" unique_id=812310829]
+shape = SubResource("BoxShape3D_tlhpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/InteractComponent" unique_id=976379947]
+mesh = SubResource("BoxMesh_6fnls")
+
 [connection signal="interacted" from="Stage/MovingPlatform/InteractComponent" to="Stage/MovingPlatform" method="toggle"]
+[connection signal="interacted" from="Node3D/InteractComponent" to="Node3D/ThingEmitter" method="emit"]
