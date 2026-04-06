@@ -10,7 +10,6 @@ signal interacted();
 var wasInteracted = false;
 
 func interact():
-	print("interacted")
 	if oneShot:
 		if !wasInteracted:
 			interacted.emit();
