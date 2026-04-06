@@ -1,4 +1,4 @@
-extends Area3D
+extends Pickip
 
 @export var type: WeaponBase.AMMOTYPE;
 @export var amount: int = 10;

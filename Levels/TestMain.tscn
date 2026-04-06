@@ -420,6 +420,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
 target = Vector3(2.2, 14, 50)
 startingPos = Vector3(-73.318, 14, 50)
 active = false
+oneShot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/MovingPlatform" unique_id=932385091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037384033, 0, 1.2769814)
@@ -437,7 +438,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00037384033, 0.5625, 6.2476
 collision_layer = 288
 collision_mask = 0
 script = ExtResource("20_xfrt1")
-oneShot = true
 metadata/_custom_type_script = "uid://ccucccdarx02v"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/MovingPlatform/InteractComponent" unique_id=949254706]

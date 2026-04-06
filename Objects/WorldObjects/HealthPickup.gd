@@ -1,4 +1,4 @@
-extends Area3D
+extends Pickip
 
 @export var amount: int = 10;
 
