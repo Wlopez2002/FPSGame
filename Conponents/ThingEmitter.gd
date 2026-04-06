@@ -23,7 +23,6 @@ func emit():
 		newScene.global_position = spawnLocation
 	if time != 0.0:
 		timer.start(time)
-	print(emitterCount)
 
 
 func _on_timer_timeout() -> void:

@@ -15,7 +15,6 @@ func emit():
 	
 	emitterCount = emitterCount + 1;
 	var newScene = toCopy.duplicate()
-	print(newScene)
 	if parent != null:
 		parent.add_child(newScene)
 	else:
@@ -24,7 +23,6 @@ func emit():
 		newScene.global_position = spawnLocation
 	if time != 0.0:
 		timer.start(time)
-	print(emitterCount)
 
 
 func _on_timer_timeout() -> void:

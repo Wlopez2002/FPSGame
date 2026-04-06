@@ -499,7 +499,7 @@ mesh = SubResource("BoxMesh_6fnls")
 
 [node name="CopyEmitter" parent="Node3D" unique_id=626030999 node_paths=PackedStringArray("toCopy", "parent") instance=ExtResource("20_tlhpo")]
 toCopy = NodePath("../../OutlevelStuff/AmmoPickup")
-spawnLocation = Vector3(12, 2, 0)
+spawnLocation = Vector3(12, 2, 2)
 parent = NodePath("../../Stage")
 
 [node name="OutlevelStuff" type="Node3D" parent="." unique_id=23989236]
