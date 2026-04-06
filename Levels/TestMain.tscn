@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
 [ext_resource type="PackedScene" uid="uid://csvhwbpvhnfh7" path="res://Objects/WorldObjects/MovingPlatform.tscn" id="15_e47tw"]
 [ext_resource type="Texture2D" uid="uid://coawg3duocypx" path="res://Resources/Textures/Tile_12-128x128.png" id="16_e47tw"]
-[ext_resource type="PackedScene" uid="uid://co3likvlt573g" path="res://Conponents/ThingEmitter.tscn" id="20_tlhpo"]
+[ext_resource type="PackedScene" uid="uid://i5vs6fsi0ei5" path="res://Conponents/CopyEmitter.tscn" id="20_tlhpo"]
 [ext_resource type="Script" uid="uid://ccucccdarx02v" path="res://Conponents/InteractComponent.gd" id="20_xfrt1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqfas"]
@@ -331,7 +331,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.897077, 0.4581728, 11.5864
 type = 1
 
 [node name="AmmoPickup4" parent="Stage/AmmoPick" unique_id=506528832 instance=ExtResource("7_dk54w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5440319, 0.4581747, 8.255812)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5440319, 0.45817137, 8.255812)
 type = 1
 
 [node name="AmmoPickup5" parent="Stage/AmmoPick" unique_id=1448151812 instance=ExtResource("7_dk54w")]
@@ -484,11 +484,6 @@ environment = SubResource("Environment_iqfas")
 [node name="Node3D" type="Node3D" parent="." unique_id=661547622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, 2.2520137)
 
-[node name="ThingEmitter" parent="Node3D" unique_id=1833471045 instance=ExtResource("20_tlhpo")]
-scene = ExtResource("9_sc5o3")
-spawnLocation = Vector3(12, 2, 2)
-time = 1.0
-
 [node name="InteractComponent" type="Area3D" parent="Node3D" unique_id=1888922370]
 collision_layer = 288
 collision_mask = 0
@@ -502,5 +497,16 @@ shape = SubResource("BoxShape3D_tlhpo")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/InteractComponent" unique_id=976379947]
 mesh = SubResource("BoxMesh_6fnls")
 
+[node name="CopyEmitter" parent="Node3D" unique_id=626030999 node_paths=PackedStringArray("toCopy", "parent") instance=ExtResource("20_tlhpo")]
+toCopy = NodePath("../../OutlevelStuff/AmmoPickup")
+spawnLocation = Vector3(12, 2, 0)
+parent = NodePath("../../Stage")
+
+[node name="OutlevelStuff" type="Node3D" parent="." unique_id=23989236]
+
+[node name="AmmoPickup" parent="OutlevelStuff" unique_id=2061592266 instance=ExtResource("7_dk54w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.28936, 2.7935057, 0)
+type = 1
+
 [connection signal="interacted" from="Stage/MovingPlatform/InteractComponent" to="Stage/MovingPlatform" method="toggle"]
-[connection signal="interacted" from="Node3D/InteractComponent" to="Node3D/ThingEmitter" method="emit"]
+[connection signal="interacted" from="Node3D/InteractComponent" to="Node3D/CopyEmitter" method="emit"]
