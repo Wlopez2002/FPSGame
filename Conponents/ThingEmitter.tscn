@@ -4,3 +4,8 @@
 
 [node name="ThingEmitter" type="Node3D" unique_id=1833471045]
 script = ExtResource("1_8t4ht")
+
+[node name="Timer" type="Timer" parent="." unique_id=550540889]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
