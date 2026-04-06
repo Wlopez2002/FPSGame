@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cyht86f1lnrvy" path="res://Conponents/CopyEmitter.gd" id="1_ubpfj"]
 
-[node name="CopyEmitter" type="Node3D" unique_id=626030999]
+[node name="CopyEmitter" type="Node3D" unique_id=626030999 groups=["PersistentNRI"]]
 script = ExtResource("1_ubpfj")
 
 [node name="Timer" type="Timer" parent="." unique_id=1317076125]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

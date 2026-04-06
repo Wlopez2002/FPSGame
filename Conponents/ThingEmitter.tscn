@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c53qmw4kgx7ld" path="res://Conponents/ThingEmitter.gd" id="1_8t4ht"]
 
-[node name="ThingEmitter" type="Node3D" unique_id=1833471045]
+[node name="ThingEmitter" type="Node3D" unique_id=1833471045 groups=["PersistentNRI"]]
 script = ExtResource("1_8t4ht")
 
 [node name="Timer" type="Timer" parent="." unique_id=550540889]

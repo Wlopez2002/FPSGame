@@ -37,6 +37,15 @@ func saveGame():
 	var nodesToSaveNRI = get_tree().get_nodes_in_group("PersistentNRI")
 	var nodeData: Array[Dictionary];
 	var nodeDataNRI: Array[Dictionary];
+	
+	## drop PersistentNSL nodes
+	for node in nodesToSave:
+		if node.is_in_group("PersistentNSL"):
+			nodesToSave.remove_at(nodesToSave.find(node))
+	for node in nodesToSaveNRI:
+		if node.is_in_group("PersistentNSL"):
+			nodesToSaveNRI.remove_at(nodesToSaveNRI.find(node))
+	
 	for node in nodesToSave:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
@@ -140,7 +149,8 @@ func loadPNodes(newObjects, newData):
 	## Remove persistent nodes from the level
 	var persistentNodes = get_tree().get_nodes_in_group("Persistent")
 	for i in persistentNodes:
-		i.queue_free()
+		if !i.is_in_group("PersistentNSL"):
+			i.queue_free()
 	
 	for index in range(newObjects.size()):
 		var newObject = newObjects[index]

@@ -33,6 +33,7 @@ import/blender/enabled=false
 
 Persistent=""
 PersistentNRI="Persistent No Re-Instance, a persistent node that must not have a new isntance created."
+PersistentNSL="This node is tagged as persistent, but it should not be saved or loaded. This should be used for persistent nodes that exist outside the level and are copied in."
 
 [input]
 
