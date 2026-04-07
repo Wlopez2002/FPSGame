@@ -28,8 +28,12 @@ height = 1.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7v5gs"]
 height = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8sa4y"]
+size = Vector3(0.25, 0.25, 0.25)
+
 [node name="Player" type="CharacterBody3D" unique_id=420592935 groups=["Persistent", "Player"]]
 collision_layer = 2
+collision_mask = 65
 floor_constant_speed = true
 platform_floor_layers = 4294967040
 script = ExtResource("1_3qydi")
@@ -95,6 +99,7 @@ target_position = Vector3(0, 2, 0)
 
 [node name="FloorDetect" type="RayCast3D" parent="." unique_id=525362847]
 target_position = Vector3(0, -100, 0)
+collision_mask = 65
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1273521177]
 anchors_preset = 8
@@ -172,6 +177,12 @@ collision_mask = 128
 [node name="Body" type="CollisionShape3D" parent="WaterDetectorHead" unique_id=2011252837]
 shape = SubResource("CapsuleShape3D_7v5gs")
 
+[node name="CrushDetector" type="Area3D" parent="." unique_id=1120853109]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrushDetector" unique_id=389319109]
+shape = SubResource("BoxShape3D_8sa4y")
+
 [connection signal="timeout" from="Head/Weapons/switchTimer" to="Head/Weapons" method="_on_switch_timer_timeout"]
 [connection signal="HitSignal" from="HitBox" to="EntityComponent" method="_damage"]
 [connection signal="killed" from="EntityComponent" to="." method="_on_entity_component_killed"]
@@ -184,3 +195,4 @@ shape = SubResource("CapsuleShape3D_7v5gs")
 [connection signal="finished" from="PlayerSounds/StartMovePlayer" to="PlayerSounds" method="_on_start_move_player_finished"]
 [connection signal="area_entered" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_entered"]
 [connection signal="area_exited" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_exited"]
+[connection signal="body_entered" from="CrushDetector" to="HitBox" method="_on_crush_detector_body_entered"]

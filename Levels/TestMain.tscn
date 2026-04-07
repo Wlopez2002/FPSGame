@@ -115,6 +115,18 @@ ambient_light_sky_contribution = 0.1
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 
+[sub_resource type="BoxMesh" id="BoxMesh_kn26y"]
+size = Vector3(5, 0.25, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rvy5"]
+size = Vector3(5, 0.25, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7rvy5"]
+size = Vector3(0.25, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vy5do"]
+size = Vector3(0.25, 5, 5)
+
 [node name="TestMain" type="Node3D" unique_id=347182156]
 script = ExtResource("1_s4r6r")
 
@@ -448,6 +460,48 @@ shape = SubResource("BoxShape3D_tlhpo")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/MovingPlatform/InteractComponent" unique_id=1738106343]
 mesh = SubResource("BoxMesh_6fnls")
 
+[node name="makeAmmo" type="Node3D" parent="Stage" unique_id=661547622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, 2.2520137)
+
+[node name="InteractComponent" type="Area3D" parent="Stage/makeAmmo" unique_id=1888922370]
+collision_layer = 288
+collision_mask = 0
+script = ExtResource("20_xfrt1")
+hitable = false
+metadata/_custom_type_script = "uid://ccucccdarx02v"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/makeAmmo/InteractComponent" unique_id=812310829]
+shape = SubResource("BoxShape3D_tlhpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/makeAmmo/InteractComponent" unique_id=976379947]
+mesh = SubResource("BoxMesh_6fnls")
+
+[node name="CopyEmitter" parent="Stage/makeAmmo" unique_id=626030999 node_paths=PackedStringArray("toCopy", "spawnParent") instance=ExtResource("20_tlhpo")]
+toCopy = NodePath("../../../OutlevelStuff/AmmoPickup")
+spawnLocation = Vector3(12, 2, 2)
+spawnParent = NodePath("../..")
+
+[node name="makeEnemy" type="Node3D" parent="Stage" unique_id=325466066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, -18.14139)
+
+[node name="InteractComponent" type="Area3D" parent="Stage/makeEnemy" unique_id=149789053]
+collision_layer = 288
+collision_mask = 0
+script = ExtResource("20_xfrt1")
+hitable = false
+metadata/_custom_type_script = "uid://ccucccdarx02v"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/makeEnemy/InteractComponent" unique_id=1781365854]
+shape = SubResource("BoxShape3D_tlhpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/makeEnemy/InteractComponent" unique_id=969217025]
+mesh = SubResource("BoxMesh_6fnls")
+
+[node name="ThingEmitter" parent="Stage/makeEnemy" unique_id=1833471045 node_paths=PackedStringArray("spawnParent") instance=ExtResource("21_tlhpo")]
+scene = ExtResource("9_sc5o3")
+spawnLocation = Vector3(12, 2, -18)
+spawnParent = NodePath("../..")
+
 [node name="Player" parent="." unique_id=420592935 instance=ExtResource("8_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310192, 1.1725054, 0.55590415)
 
@@ -482,54 +536,34 @@ directional_shadow_max_distance = 220.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=424475211]
 environment = SubResource("Environment_iqfas")
 
-[node name="makeAmmo" type="Node3D" parent="." unique_id=661547622]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, 2.2520137)
-
-[node name="InteractComponent" type="Area3D" parent="makeAmmo" unique_id=1888922370]
-collision_layer = 288
-collision_mask = 0
-script = ExtResource("20_xfrt1")
-hitable = false
-metadata/_custom_type_script = "uid://ccucccdarx02v"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="makeAmmo/InteractComponent" unique_id=812310829]
-shape = SubResource("BoxShape3D_tlhpo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="makeAmmo/InteractComponent" unique_id=976379947]
-mesh = SubResource("BoxMesh_6fnls")
-
-[node name="CopyEmitter" parent="makeAmmo" unique_id=626030999 node_paths=PackedStringArray("toCopy", "spawnParent") instance=ExtResource("20_tlhpo")]
-toCopy = NodePath("../../OutlevelStuff/AmmoPickup")
-spawnLocation = Vector3(12, 2, 2)
-spawnParent = NodePath("../../Stage")
-
-[node name="makeEnemy" type="Node3D" parent="." unique_id=325466066]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.988554, 2.7862573, -18.14139)
-
-[node name="InteractComponent" type="Area3D" parent="makeEnemy" unique_id=149789053]
-collision_layer = 288
-collision_mask = 0
-script = ExtResource("20_xfrt1")
-hitable = false
-metadata/_custom_type_script = "uid://ccucccdarx02v"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="makeEnemy/InteractComponent" unique_id=1781365854]
-shape = SubResource("BoxShape3D_tlhpo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="makeEnemy/InteractComponent" unique_id=969217025]
-mesh = SubResource("BoxMesh_6fnls")
-
-[node name="ThingEmitter" parent="makeEnemy" unique_id=1833471045 node_paths=PackedStringArray("spawnParent") instance=ExtResource("21_tlhpo")]
-scene = ExtResource("9_sc5o3")
-spawnLocation = Vector3(12, 2, -18)
-spawnParent = NodePath("../../Stage")
-
 [node name="OutlevelStuff" type="Node3D" parent="." unique_id=23989236]
 
 [node name="AmmoPickup" parent="OutlevelStuff" unique_id=2061592266 groups=["PersistentNSL"] instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.312769, 2.7935057, -6.9663157)
 type = 1
 
+[node name="crusher" parent="." unique_id=800912476 instance=ExtResource("15_e47tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, 5.333173, 0)
+target = Vector3(-80, 13, 0)
+startingPos = Vector3(-80, 5.333, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="crusher" unique_id=321507373]
+mesh = SubResource("BoxMesh_kn26y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crusher" unique_id=1785272304]
+shape = SubResource("BoxShape3D_7rvy5")
+
+[node name="crusher2" parent="." unique_id=591367250 instance=ExtResource("15_e47tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.576, 7.708, 5.753)
+target = Vector3(-82.365, 7.708, 5.753)
+startingPos = Vector3(-77.576, 7.708, 5.753)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="crusher2" unique_id=1779761887]
+mesh = SubResource("BoxMesh_7rvy5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crusher2" unique_id=99074852]
+shape = SubResource("BoxShape3D_vy5do")
+
 [connection signal="interacted" from="Stage/MovingPlatform/InteractComponent" to="Stage/MovingPlatform" method="toggle"]
-[connection signal="interacted" from="makeAmmo/InteractComponent" to="makeAmmo/CopyEmitter" method="emit"]
-[connection signal="interacted" from="makeEnemy/InteractComponent" to="makeEnemy/ThingEmitter" method="emit"]
+[connection signal="interacted" from="Stage/makeAmmo/InteractComponent" to="Stage/makeAmmo/CopyEmitter" method="emit"]
+[connection signal="interacted" from="Stage/makeEnemy/InteractComponent" to="Stage/makeEnemy/ThingEmitter" method="emit"]

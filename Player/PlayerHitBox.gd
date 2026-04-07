@@ -8,3 +8,6 @@ func collectAmmo(type: WeaponBase.AMMOTYPE, amount: int) -> int:
 
 func collectHealth(amount: int) -> int:
 	return playerEntity.heal(amount)
+
+func _on_crush_detector_body_entered(body: Node3D) -> void:
+	playerEntity.killMe();
