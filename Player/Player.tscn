@@ -29,7 +29,7 @@ height = 1.0
 height = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8sa4y"]
-size = Vector3(0.25, 0.8466797, 0.25)
+size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Player" type="CharacterBody3D" unique_id=420592935 groups=["Persistent", "Player"]]
 collision_layer = 2
@@ -178,7 +178,6 @@ collision_mask = 128
 shape = SubResource("CapsuleShape3D_7v5gs")
 
 [node name="CrushDetector" type="Area3D" parent="." unique_id=1120853109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CrushDetector" unique_id=389319109]
