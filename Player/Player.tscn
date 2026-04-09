@@ -98,6 +98,9 @@ playerWeapons = NodePath("../Head/Weapons")
 playerCharBody = NodePath("..")
 playerEntity = NodePath("../EntityComponent")
 
+[node name="InGameMenu" parent="." unique_id=576491018 instance=ExtResource("9_j23h2")]
+visible = false
+
 [node name="Uncrouch" type="RayCast3D" parent="." unique_id=382785114]
 target_position = Vector3(0, 2, 0)
 
@@ -105,7 +108,11 @@ target_position = Vector3(0, 2, 0)
 target_position = Vector3(0, -100, 0)
 collision_mask = 65
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1273521177]
+[node name="DashTimer" type="Timer" parent="." unique_id=977848242]
+
+[node name="DashGraceTimer" type="Timer" parent="." unique_id=1743930654]
+
+[node name="Crosshair" type="ColorRect" parent="." unique_id=1273521177]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -130,13 +137,6 @@ metadata/_custom_type_script = "uid://cu3vscarvv63s"
 shape = SubResource("CapsuleShape3D_kpjcp")
 
 [node name="EntityComponent" parent="." unique_id=1377202246 instance=ExtResource("8_s1rgi")]
-
-[node name="DashTimer" type="Timer" parent="." unique_id=977848242]
-
-[node name="DashGraceTimer" type="Timer" parent="." unique_id=1743930654]
-
-[node name="InGameMenu" parent="." unique_id=576491018 instance=ExtResource("9_j23h2")]
-visible = false
 
 [node name="PlayerSounds" type="Node3D" parent="." unique_id=835000005 node_paths=PackedStringArray("playerBody")]
 script = ExtResource("9_5wa8t")
@@ -189,14 +189,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0024414063, 0)
 shape = SubResource("BoxShape3D_8sa4y")
 
 [connection signal="timeout" from="Head/Weapons/switchTimer" to="Head/Weapons" method="_on_switch_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashGraceTimer" to="." method="_on_dash_grace_timer_timeout"]
 [connection signal="HitSignal" from="HitBox" to="EntityComponent" method="_damage"]
 [connection signal="killed" from="EntityComponent" to="." method="_on_entity_component_killed"]
 [connection signal="killed" from="EntityComponent" to="Head/Weapons" method="_on_entity_component_killed"]
 [connection signal="killed" from="EntityComponent" to="PlayerUI" method="_playerKilled"]
 [connection signal="killed" from="EntityComponent" to="InGameMenu" method="_playerKilled"]
 [connection signal="killed" from="EntityComponent" to="PlayerSounds" method="_on_entity_component_killed"]
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="DashGraceTimer" to="." method="_on_dash_grace_timer_timeout"]
 [connection signal="finished" from="PlayerSounds/StartMovePlayer" to="PlayerSounds" method="_on_start_move_player_finished"]
 [connection signal="area_entered" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_entered"]
 [connection signal="area_exited" from="WaterDetectorHead" to="PlayerUI" method="_on_water_detector_head_area_exited"]

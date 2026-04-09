@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://fvc0wjd0pifn"]
 
 [ext_resource type="Script" uid="uid://blw6hyb7vdm8t" path="res://UI/InGameMenu.gd" id="1_okm3a"]
+[ext_resource type="Script" uid="uid://vf11v2j5n12e" path="res://UI/DebugMenu.gd" id="2_tak8a"]
 
 [node name="InGameMenu" type="CanvasLayer" unique_id=576491018]
 process_mode = 3
@@ -66,6 +67,30 @@ min_value = -20.0
 max_value = 0.0
 step = 0.5
 
+[node name="DebugMenu" type="VBoxContainer" parent="." unique_id=1473110160]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("2_tak8a")
+
+[node name="DebugInfoBut" type="CheckButton" parent="DebugMenu" unique_id=1561183477]
+layout_mode = 2
+text = "DebugInfo"
+
+[node name="GodModeBut" type="CheckButton" parent="DebugMenu" unique_id=669438161]
+layout_mode = 2
+text = "GodMode"
+
+[node name="NoClipBut" type="CheckButton" parent="DebugMenu" unique_id=2096874554]
+layout_mode = 2
+text = "NoClip"
+
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
@@ -73,3 +98,6 @@ step = 0.5
 [connection signal="timeout" from="PlayerKilledTimer" to="." method="_on_player_killed_timer_timeout"]
 [connection signal="drag_ended" from="Settings/MS" to="." method="_on_ms_drag_ended"]
 [connection signal="drag_ended" from="Settings/Vol" to="." method="_on_vol_drag_ended"]
+[connection signal="toggled" from="DebugMenu/DebugInfoBut" to="DebugMenu" method="_on_debug_info_but_toggled"]
+[connection signal="toggled" from="DebugMenu/GodModeBut" to="DebugMenu" method="_on_god_mode_but_toggled"]
+[connection signal="toggled" from="DebugMenu/NoClipBut" to="DebugMenu" method="_on_no_clip_but_toggled"]

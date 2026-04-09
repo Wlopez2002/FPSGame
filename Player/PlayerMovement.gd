@@ -13,8 +13,6 @@ class_name PlayerBody
 ## do not use it to check if the player is grounded
 @onready var floorDetector = $FloorDetect;
 
-@export var maxDoubleJumps = 0;
-
 const MAXGROUNDSPEED = 10.0;
 const MAXCROUCHSPEED = 5.0;
 const MAXAIRSPEED = 1.0;
@@ -28,7 +26,6 @@ var friction = 4.0;
 var jumpImpulse = 8.0;
 var crouching = false;
 var tryUncrouch = false; 
-var doubleJumps = 0;
 var dashCoolDown = 1.5;
 var dashGrace = 0.5;
 var canDash = true;
@@ -53,11 +50,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MoveJump"):
 		if is_on_floor() or isInWater:
 			_applyForce(Vector3(0,jumpImpulse,0))
-		#else:
-			#if doubleJumps > 0:
-				#velocity.y = 0;
-				#_applyForce(Vector3(0,jumpImpulse,0))
-				#doubleJumps -= 1;
 	if event.is_action_pressed("MoveCrouch"):
 		bodyCol.shape.height = 1.0;
 		crouching = true;
@@ -84,6 +76,26 @@ func _physics_process(delta: float) -> void:
 			tryUncrouch = false
 			bodyCol.shape.height = 2.0;
 	
+	if GameData.noClip:
+		bodyCol.disabled = true
+		$CrushDetector/CollisionShape3D.disabled = true
+		var input_dir := Vector2.ZERO
+		var headNodeBasis: Basis = headNode.transform.basis
+		if movementEnabled:
+			input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackward");
+		var wishDir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized();
+		wishDir.y = (headNodeBasis * Vector3(input_dir.x, 0, input_dir.y)).normalized().y;
+		
+		naturalVelocity = _applyFriction(naturalVelocity, delta)
+		_accelerate(wishDir, MAXGROUNDSPEED*2, delta);
+		
+		velocity = naturalVelocity;
+		move_and_slide()
+		return;
+	else: ## bad for performance
+		bodyCol.disabled = false
+		$CrushDetector/CollisionShape3D.disabled = false
+	
 	if waterDetector.get_overlapping_areas():
 		isInWater = true;
 		_updateVelocityWater(delta)
@@ -92,7 +104,6 @@ func _physics_process(delta: float) -> void:
 		_updateVelocity(delta)
 	
 	if is_on_floor():
-		doubleJumps = maxDoubleJumps;
 		wasInAir = false
 	else:
 		wasInAir = true;

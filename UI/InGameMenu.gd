@@ -31,6 +31,9 @@ func toggleMenu():
 		get_tree().paused = true;
 		SaveLoadManager.loadSettings();
 
+func _playerKilled():
+	playerKilledTimer.start(1.0)
+
 
 func _on_resume_button_pressed() -> void:
 	toggleMenu();
@@ -42,9 +45,6 @@ func _on_load_button_pressed() -> void:
 func _on_quit_button_pressed() -> void:
 	SaveLoadManager.saveSettings();
 	get_tree().quit();
-
-func _playerKilled():
-	playerKilledTimer.start(1.0)
 
 func _on_player_killed_timer_timeout() -> void:
 	if menuUp == false:

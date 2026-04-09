@@ -9,5 +9,10 @@ func collectAmmo(type: WeaponBase.AMMOTYPE, amount: int) -> int:
 func collectHealth(amount: int) -> int:
 	return playerEntity.heal(amount)
 
+func _hit(damage: int):
+	if !GameData.godMode:
+		HitSignal.emit(damage);
+
 func _on_crush_detector_body_entered(_body: Node3D) -> void:
-	playerEntity.killMe();
+	if !GameData.godMode:
+		playerEntity.killMe();

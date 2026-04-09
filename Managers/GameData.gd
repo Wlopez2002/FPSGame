@@ -2,7 +2,12 @@ extends Node
 
 var currentLevel: Level;
 
-## settings
+## Debug Settings
+var debugInfo = false;
+var godMode = false;
+var noClip = false;
+
+## Settings
 var MOUSESENSITIVITYBASE = 0.003;
 var MOUSESENSITIVITY = 0.003;
 
