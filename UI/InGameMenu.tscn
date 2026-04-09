@@ -39,10 +39,12 @@ text = "Quit
 one_shot = true
 
 [node name="Settings" type="VBoxContainer" parent="." unique_id=1091061773]
-offset_left = 750.0
-offset_top = 42.0
-offset_right = 1027.0
-offset_bottom = 85.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -277.0
+offset_bottom = 90.0
+grow_horizontal = 0
 
 [node name="MSL" type="Label" parent="Settings" unique_id=451352571]
 layout_mode = 2
@@ -51,7 +53,7 @@ text = "Mouse Sensitivity"
 [node name="MS" type="HSlider" parent="Settings" unique_id=943757245]
 layout_mode = 2
 max_value = 2.0
-step = 0.1
+step = 0.01
 value = 1.0
 
 [node name="VolL" type="Label" parent="Settings" unique_id=1109812261]
