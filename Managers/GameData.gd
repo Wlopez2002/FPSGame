@@ -6,6 +6,9 @@ var currentLevel: Level;
 var MOUSESENSITIVITYBASE = 0.003;
 var MOUSESENSITIVITY = 0.003;
 
+func _ready():
+	randomize()
+
 func changeLevel(level: PackedScene):
 	var playerData = get_tree().get_first_node_in_group("Player").save();
 	## clear any level children that may exist

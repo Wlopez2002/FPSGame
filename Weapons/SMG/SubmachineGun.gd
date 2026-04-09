@@ -1,15 +1,17 @@
 extends WeaponBase
 
 @onready var mesh = $MeshInstance3D;
-@onready var hitRay = $RayCast3D;
+@onready var hitRay = $MeshInstance3D/RayCast3D
 @onready var attackSpeedTimer = $AttackSpeedTimer;
 
 @onready var pistolClickPlayer = $WeaponSounds/PistolClickPlayer;
 @onready var pistolFirePlayer = $WeaponSounds/PistolFirePlayer;
-@onready var hitScanEffect = $HitScanBulletShot
+@onready var hitScanEffect = $MeshInstance3D/HitScanBulletShot
 
+const SPREAD = 0.1;
 var attacking = false;
 var bodyHolding;
+var RNG = RandomNumberGenerator.new()
 
 func _switchTo():
 	pass;
@@ -27,6 +29,7 @@ func _attackReleased(_body: CharacterBody3D):
 
 func _attack(_body: CharacterBody3D):
 	if canAttack and curAmmo > 0:
+		applySpread()
 		var hit = hitRay.get_collider();
 		if hit is HitBox:
 			hit._hit(damage);
@@ -40,6 +43,12 @@ func _attack(_body: CharacterBody3D):
 	elif curAmmo <= 0:
 		pistolClickPlayer.play()
 		attackSpeedTimer.start(attackSpeed)
+
+func applySpread():
+	hitRay.rotation.x = RNG.randf_range(-SPREAD, SPREAD)
+	hitRay.rotation.y = RNG.randf_range(-SPREAD, SPREAD)
+	hitScanEffect.rotation.x = hitRay.rotation.x
+	hitScanEffect.rotation.y = hitRay.rotation.y
 
 func _on_attack_speed_timer_timeout() -> void:
 	canAttack = true;

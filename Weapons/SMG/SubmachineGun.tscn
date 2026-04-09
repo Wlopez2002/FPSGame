@@ -34,10 +34,14 @@ mesh = SubResource("BoxMesh_rq64q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14318645, -0.029386222)
 mesh = SubResource("BoxMesh_mylev")
 
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1535723641]
+[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D" unique_id=1535723641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57035804, 0.25661874, 0.515957)
 target_position = Vector3(0, 0, -1000)
 collision_mask = 32
 collide_with_areas = true
+
+[node name="HitScanBulletShot" parent="MeshInstance3D" unique_id=1801671218 instance=ExtResource("4_qgxe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="WeaponSounds" type="Node3D" parent="." unique_id=1418824598]
 
@@ -49,8 +53,5 @@ max_db = -2.0
 stream = ExtResource("3_o52ep")
 volume_db = -10.0
 max_db = -4.0
-
-[node name="HitScanBulletShot" parent="." unique_id=1801671218 instance=ExtResource("4_qgxe7")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.05255556, -2.1678982)
 
 [connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]
