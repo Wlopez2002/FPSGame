@@ -540,7 +540,7 @@ environment = SubResource("Environment_iqfas")
 
 [node name="AmmoPickup" parent="OutlevelStuff" unique_id=2061592266 groups=["PersistentNSL"] instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.312769, 2.7935057, -6.9663157)
-type = 1
+type = 2
 
 [node name="crusher" parent="." unique_id=800912476 instance=ExtResource("15_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, 5.333173, 0)

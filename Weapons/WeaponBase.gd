@@ -3,7 +3,7 @@ extends Node3D
 class_name WeaponBase
 
 enum WEAPONTYPE {MELEE, HITSCAN, PROJECTILE}
-enum AMMOTYPE {NONE, PISTOL, GRENADE}
+enum AMMOTYPE {NONE, PISTOL, SMG, GRENADE}
 
 @export var weaponName: String
 @export var myAmmoType: AMMOTYPE;

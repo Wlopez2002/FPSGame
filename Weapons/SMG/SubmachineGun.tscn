@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://48of3ft6062f"]
+
+[ext_resource type="Script" uid="uid://ceblotwaiwusq" path="res://Weapons/SMG/SubmachineGun.gd" id="1_mylev"]
+[ext_resource type="AudioStream" uid="uid://vp22mbf7clmw" path="res://Resources/Sounds/WeaponSounds/Pistol/674568__sertonin__9mm-handgun-being-dry-fired.wav" id="2_5bms3"]
+[ext_resource type="AudioStream" uid="uid://bl7vqy2fdflhc" path="res://Resources/Sounds/WeaponSounds/Pistol/427592__michorvath__9mm-pistol-shot.wav" id="3_o52ep"]
+[ext_resource type="PackedScene" uid="uid://dlfm0q6qu5paa" path="res://Resources/Effects/HitScanBulletShot.tscn" id="4_qgxe7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rq64q"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mylev"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.23)
+
+[node name="SubmachineGun" type="Node3D" unique_id=1672506506]
+script = ExtResource("1_mylev")
+weaponName = "Submachine Gun"
+myAmmoType = 2
+type = 1
+damage = 1
+attackSpeed = 0.1
+maxAmmo = 40
+
+[node name="AttackSpeedTimer" type="Timer" parent="." unique_id=1733602128]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1410210213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57035804, -0.25661874, -0.515957)
+mesh = SubResource("BoxMesh_rq64q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=2009302311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14318645, -0.029386222)
+mesh = SubResource("BoxMesh_mylev")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1535723641]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 32
+collide_with_areas = true
+
+[node name="WeaponSounds" type="Node3D" parent="." unique_id=1418824598]
+
+[node name="PistolClickPlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=909155451]
+stream = ExtResource("2_5bms3")
+max_db = -2.0
+
+[node name="PistolFirePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=2007820414]
+stream = ExtResource("3_o52ep")
+volume_db = -10.0
+max_db = -4.0
+
+[node name="HitScanBulletShot" parent="." unique_id=1801671218 instance=ExtResource("4_qgxe7")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.05255556, -2.1678982)
+
+[connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]
