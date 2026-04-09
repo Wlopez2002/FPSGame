@@ -21,7 +21,7 @@ weaponName = "Submachine Gun"
 myAmmoType = 2
 type = 1
 damage = 1
-attackSpeed = 0.05
+attackSpeed = 0.1
 maxAmmo = 40
 
 [node name="AttackSpeedTimer" type="Timer" parent="." unique_id=1733602128]
@@ -41,6 +41,24 @@ collision_mask = 32
 collide_with_areas = true
 
 [node name="HitScanBulletShot" parent="MeshInstance3D" unique_id=1801671218 instance=ExtResource("4_qgxe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="hitray2" type="RayCast3D" parent="MeshInstance3D" unique_id=1509755260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57035804, 0.25661874, 0.515957)
+target_position = Vector3(0, 0, -1000)
+collision_mask = 32
+collide_with_areas = true
+
+[node name="HitScanBulletShot2" parent="MeshInstance3D" unique_id=1256187371 instance=ExtResource("4_qgxe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="hitray3" type="RayCast3D" parent="MeshInstance3D" unique_id=1816837289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57035804, 0.25661874, 0.515957)
+target_position = Vector3(0, 0, -1000)
+collision_mask = 32
+collide_with_areas = true
+
+[node name="HitScanBulletShot3" parent="MeshInstance3D" unique_id=1076102111 instance=ExtResource("4_qgxe7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="WeaponSounds" type="Node3D" parent="." unique_id=1418824598]
