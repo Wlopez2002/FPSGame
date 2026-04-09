@@ -4,8 +4,8 @@ williamlopez011602@gmail.com
 
 TODO:
 	* Redo file structure.
-	* Save user settings
-	* Fix movement audio for sliding on moving platform
+	* Ballance health and damage
+	* Fix movement audio for sliding on moving platform and landing on vertical ones
 	* projectile and enemy speed in water
 	* more enemies
 	* ability to pickup new weapons
