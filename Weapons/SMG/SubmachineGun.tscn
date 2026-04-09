@@ -21,7 +21,7 @@ weaponName = "Submachine Gun"
 myAmmoType = 2
 type = 1
 damage = 1
-attackSpeed = 0.1
+attackSpeed = 0.05
 maxAmmo = 40
 
 [node name="AttackSpeedTimer" type="Timer" parent="." unique_id=1733602128]
@@ -34,7 +34,7 @@ mesh = SubResource("BoxMesh_rq64q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14318645, -0.029386222)
 mesh = SubResource("BoxMesh_mylev")
 
-[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D" unique_id=1535723641]
+[node name="hitray" type="RayCast3D" parent="MeshInstance3D" unique_id=1535723641]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57035804, 0.25661874, 0.515957)
 target_position = Vector3(0, 0, -1000)
 collision_mask = 32

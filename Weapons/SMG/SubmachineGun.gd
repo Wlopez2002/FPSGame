@@ -1,7 +1,7 @@
 extends WeaponBase
 
 @onready var mesh = $MeshInstance3D;
-@onready var hitRay = $MeshInstance3D/RayCast3D
+@onready var hitRay = $MeshInstance3D/hitray
 @onready var attackSpeedTimer = $AttackSpeedTimer;
 
 @onready var pistolClickPlayer = $WeaponSounds/PistolClickPlayer;

@@ -349,22 +349,22 @@ type = 1
 
 [node name="AmmoPickup5" parent="Stage/AmmoPick" unique_id=1448151812 instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.21451, 14.447708, 39.786873)
-type = 2
+type = 3
 amount = 5
 
 [node name="AmmoPickup6" parent="Stage/AmmoPick" unique_id=251424451 instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.419464, 14.447706, 42.470688)
-type = 2
+type = 3
 amount = 5
 
 [node name="AmmoPickup7" parent="Stage/AmmoPick" unique_id=1907861976 instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.043655, 14.447707, 42.287144)
-type = 2
+type = 3
 amount = 5
 
 [node name="AmmoPickup8" parent="Stage/AmmoPick" unique_id=2009650690 instance=ExtResource("7_dk54w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.3403, 14.447707, 46.91346)
-type = 2
+type = 3
 amount = 5
 
 [node name="healthPick" type="Node3D" parent="Stage" unique_id=1226955198]
