@@ -19,7 +19,7 @@ height = 0.25
 [node name="GrenadeLauncher" type="Node3D" unique_id=1248248290]
 script = ExtResource("1_cb41u")
 weaponName = "Grenade Launcher"
-myAmmoType = 2
+myAmmoType = 3
 type = 2
 attackSpeed = 1.0
 maxAmmo = 20
