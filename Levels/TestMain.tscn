@@ -75,15 +75,7 @@ stencil_flags = 2
 size = Vector3(6.703186, 8.758728, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5yodq"]
-size = Vector3(12.258911, 7.5997314, 3.190918)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfrt1"]
-transparency = 1
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tlhpo"]
-material = SubResource("StandardMaterial3D_xfrt1")
-size = Vector3(12.259, 7.6, 3.191)
+size = Vector3(108.52774, 0.001, 28.277527)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dk54w"]
 size = Vector3(5, 0.125, 12)
@@ -133,7 +125,7 @@ script = ExtResource("1_s4r6r")
 [node name="Stage" type="Node3D" parent="." unique_id=1084290395]
 
 [node name="Floor" type="CSGPolygon3D" parent="Stage" unique_id=1311385875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1700387, 6.208173, 95.49319)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1700387, 6.208173, 62.455612)
 use_collision = true
 polygon = PackedVector2Array(-75.895, -10, -89.738, -1, -16.309, -1, -4.47, -6, 29.087, -6, 30.725723, -12.345289, -49.330868, -11.547039)
 depth = 170.0
@@ -146,19 +138,31 @@ size = Vector3(109.890625, 32.781128, 1)
 material = SubResource("StandardMaterial3D_s7ltb")
 
 [node name="walls" type="CSGBox3D" parent="Stage/walls" unique_id=219416493]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 155.03906)
-size = Vector3(109.890625, 32.781128, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -42.538605, 155.03906)
+size = Vector3(109.890625, 117.85834, 1)
 material = SubResource("StandardMaterial3D_s7ltb")
 
 [node name="walls2" type="CSGBox3D" parent="Stage/walls" unique_id=484490416]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.33804, 0, 79.84211)
-size = Vector3(1.1983643, 32.781128, 171.75644)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.33804, -41.12967, 79.84211)
+size = Vector3(1.1983643, 115.04047, 171.75644)
 material = SubResource("StandardMaterial3D_s7ltb")
 
 [node name="walls3" type="CSGBox3D" parent="Stage/walls" unique_id=1555571311]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.261032, 0, 79.84211)
-size = Vector3(1.1983643, 32.781128, 171.75644)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.261032, -36.92801, 79.84211)
+size = Vector3(1.1983643, 106.637146, 171.75644)
 material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="wall" type="CSGPolygon3D" parent="Stage/walls" unique_id=1882717021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.21893, -9.15617, 134.45291)
+use_collision = true
+polygon = PackedVector2Array(-93.04663, -89.60281, -89.738, -1, -16.309, -1, -4.47, -6, 29.087, -6, 26.934124, -93.82213)
+depth = 2.0
+material = SubResource("StandardMaterial3D_s7ltb")
+
+[node name="pitfloor" type="CSGBox3D" parent="Stage/walls" unique_id=1371499124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.860489, -86.22031, 140.30934)
+size = Vector3(134.04248, 7.351633, 59.55765)
+material = SubResource("StandardMaterial3D_iqfas")
 
 [node name="Pillar" type="Node3D" parent="Stage" unique_id=1886517075]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.250502, -50.610123)
@@ -420,14 +424,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.149834, 8.784193, -68.689
 [node name="Killboxes" type="Node3D" parent="Stage" unique_id=1612471219]
 
 [node name="KillBox" parent="Stage/Killboxes" unique_id=1100765962 instance=ExtResource("14_mpofa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.098795, -1.7206993, 81.83588)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.098795, -62.854042, 81.83588)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/Killboxes/KillBox" unique_id=1745945745]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39312744, 3.2998657, 1.095459)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.703415, 3.799366, -9.142303)
 shape = SubResource("BoxShape3D_5yodq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage/Killboxes/KillBox/CollisionShape3D" unique_id=1930002844]
-mesh = SubResource("BoxMesh_tlhpo")
 
 [node name="MovingPlatform" parent="Stage" unique_id=1179728837 instance=ExtResource("15_e47tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.174, 14, 50)
