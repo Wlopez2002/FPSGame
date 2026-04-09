@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		if rayCast.is_colliding():
 			if rayCast.get_collider() is PlayerBody:
 				attackTimer.start(0.5);
-				_attack();
+				call_deferred("_attack");
 	
 	swiv.look_at(player.global_position)
 
