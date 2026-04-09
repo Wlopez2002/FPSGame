@@ -27,6 +27,12 @@ func heal(num: int) -> int:
 		return 0;
 
 func killMe():
+	if GameData.debugInfo:
+		if nodeToFreeOnKill == null:
+			print("Debug: Entity killed")
+		else:
+			print("Debug: Entity killed, freeing " + str(nodeToFreeOnKill))
+	
 	health = 0;
 	killed.emit();
 	if nodeToFreeOnKill != null:
