@@ -391,7 +391,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6842623, 20.262577, -53.587
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.01214, 6.2081757, 33.05358)
 
 [node name="LevelGate" parent="Stage" unique_id=1352570114 instance=ExtResource("10_4oy1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5353, 14.197708, 83.98384)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5353, 18.729546, 83.98384)
 toLevel = ExtResource("11_nyrd7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/LevelGate" unique_id=379001195]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ceblotwaiwusq" path="res://Weapons/SMG/SubmachineGun.gd" id="1_mylev"]
 [ext_resource type="AudioStream" uid="uid://vp22mbf7clmw" path="res://Resources/Sounds/WeaponSounds/Pistol/674568__sertonin__9mm-handgun-being-dry-fired.wav" id="2_5bms3"]
-[ext_resource type="AudioStream" uid="uid://bl7vqy2fdflhc" path="res://Resources/Sounds/WeaponSounds/Pistol/427592__michorvath__9mm-pistol-shot.wav" id="3_o52ep"]
+[ext_resource type="AudioStream" uid="uid://cfji0jbnyhxgo" path="res://Resources/Sounds/WeaponSounds/SMG/smgshot.wav" id="4_mylev"]
 [ext_resource type="PackedScene" uid="uid://dlfm0q6qu5paa" path="res://Resources/Effects/HitScanBulletShot.tscn" id="4_qgxe7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
@@ -67,8 +67,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("2_5bms3")
 max_db = -2.0
 
-[node name="PistolFirePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=2007820414]
-stream = ExtResource("3_o52ep")
+[node name="SMGFirePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=2007820414]
+stream = ExtResource("4_mylev")
 volume_db = -10.0
 max_db = -4.0
 

@@ -7,7 +7,7 @@ extends WeaponBase
 @onready var attackSpeedTimer = $AttackSpeedTimer;
 
 @onready var pistolClickPlayer = $WeaponSounds/PistolClickPlayer;
-@onready var pistolFirePlayer = $WeaponSounds/PistolFirePlayer;
+@onready var smgFirePlayer = $WeaponSounds/SMGFirePlayer
 @onready var hitScanEffect = $MeshInstance3D/HitScanBulletShot
 @onready var hitScanEffect2 = $MeshInstance3D/HitScanBulletShot2
 @onready var hitScanEffect3 = $MeshInstance3D/HitScanBulletShot3
@@ -46,7 +46,7 @@ func _attack(_body: CharacterBody3D):
 		canAttack = false;
 		curAmmo -= 1;
 		mesh.mesh.material.albedo_color = Color.RED
-		pistolFirePlayer.play()
+		smgFirePlayer.play()
 		
 		hitScanEffect.emitting = true;
 		hitScanEffect.restart()
