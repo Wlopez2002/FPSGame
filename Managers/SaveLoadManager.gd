@@ -92,8 +92,6 @@ func saveGame():
 	# Store the save dictionary as a new line in the save file.
 	saveFile.store_line(jsonString)
 
-	print("saved game")
-
 func loadGame():
 	if not FileAccess.file_exists("user://saves//savegame.save"):
 		print("Error: failed to load game, file not found")
@@ -126,15 +124,13 @@ func loadGame():
 	
 	# load the level if needed
 	if GameData.currentLevel.get_scene_file_path() != saveData["CurrentLevel"]:
-		GameData.changeLevel(load(saveData["CurrentLevel"]))
-		print("changing Level")
+		GameData.changeLevel(saveData["CurrentLevel"])
 	
 	loadPNodes(newObjects, newData)
 	loadPNRINodes(saveData["PersistantNodesNRI"])
 	
 	# clean up the load
 	menuNode.toggleMenu();
-	print("loaded game")
 
 ## NRI nodes must be edited from existing nodes in the level
 ## as they have children or signals that are disrupted by removing

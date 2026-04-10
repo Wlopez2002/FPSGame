@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://b2ljfl5pygo3q" path="res://Objects/WorldObjects/HealthPickup.tscn" id="9_pru73"]
 [ext_resource type="PackedScene" uid="uid://c1sq3bu1cl5dw" path="res://InteractiveAndNPC/Enemies/EnemyWalker.tscn" id="9_sc5o3"]
 [ext_resource type="PackedScene" uid="uid://c0sjm2t24o1t3" path="res://Objects/WorldRegions/LevelGate.tscn" id="10_4oy1d"]
-[ext_resource type="PackedScene" uid="uid://ctv16b4sekgqp" path="res://Levels/TestMain2.tscn" id="11_nyrd7"]
 [ext_resource type="PackedScene" uid="uid://caydge4cw61m0" path="res://InteractiveAndNPC/Enemies/EnemyTurret.tscn" id="13_nvuov"]
 [ext_resource type="PackedScene" uid="uid://cxlun4wu7rpv7" path="res://Objects/WorldRegions/KillBox.tscn" id="14_mpofa"]
 [ext_resource type="PackedScene" uid="uid://cnh63cjhjvq6k" path="res://InteractiveAndNPC/ExplosiveBarrel.tscn" id="15_dk54w"]
@@ -396,7 +395,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.01214, 6.2081757, 33.0535
 
 [node name="LevelGate" parent="Stage" unique_id=1352570114 instance=ExtResource("10_4oy1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5353, 18.729546, 83.98384)
-toLevel = ExtResource("11_nyrd7")
+toLevel = "res://Levels/TestMain2.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stage/LevelGate" unique_id=379001195]
 shape = SubResource("BoxShape3D_nvuov")
