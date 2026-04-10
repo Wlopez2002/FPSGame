@@ -125,7 +125,7 @@ script = ExtResource("1_s4r6r")
 [node name="Stage" type="Node3D" parent="." unique_id=1084290395]
 
 [node name="Floor" type="CSGPolygon3D" parent="Stage" unique_id=1311385875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1700387, 6.208173, 62.455612)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.172764, 6.208173, 62.50596)
 use_collision = true
 polygon = PackedVector2Array(-75.895, -10, -89.738, -1, -16.309, -1, -4.47, -6, 29.087, -6, 30.725723, -12.345289, -49.330868, -11.547039)
 depth = 170.0
@@ -529,7 +529,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6380863, 35.6482, 78.12402)
 size = Vector3(122.183, 1, 170.61304)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1368498724]
-transform = Transform3D(-0.66279393, -0.7030923, 0.2576149, 0.25538212, 0.11115923, 0.96042883, -0.7039063, 0.7023567, 0.105881594, -26.08015, 103.100296, 59.58174)
+transform = Transform3D(0.06483443, -0.9931017, 0.09770099, 0.53237605, 0.117232725, 0.83835083, -0.84402144, -0.002340331, 0.5363043, -26.08015, 14.440474, 8.797264)
 light_color = Color(1, 0.9822071, 1, 1)
 shadow_enabled = true
 shadow_opacity = 0.75
