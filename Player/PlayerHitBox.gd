@@ -16,3 +16,6 @@ func _hit(damage: int):
 func _on_crush_detector_body_entered(_body: Node3D) -> void:
 	if !GameData.godMode:
 		playerEntity.killMe();
+
+func _addWeapon(path: String):
+	playerWeapons._addWeapon(path);

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://deaj8nayskvos" path="res://Objects/WorldRegions/ForcePushArea.tscn" id="7_5yodq"]
 [ext_resource type="PackedScene" uid="uid://jid42lhjm3ln" path="res://Objects/WorldObjects/AmmoPickup.tscn" id="7_dk54w"]
 [ext_resource type="PackedScene" uid="uid://bwr5lbfb4xekm" path="res://Player/Player.tscn" id="8_e47tw"]
+[ext_resource type="PackedScene" uid="uid://m1iw3c68kg1i" path="res://Objects/WorldObjects/WeaponPickup.tscn" id="8_tlhpo"]
 [ext_resource type="PackedScene" uid="uid://b2ljfl5pygo3q" path="res://Objects/WorldObjects/HealthPickup.tscn" id="9_pru73"]
 [ext_resource type="PackedScene" uid="uid://c1sq3bu1cl5dw" path="res://InteractiveAndNPC/Enemies/EnemyWalker.tscn" id="9_sc5o3"]
 [ext_resource type="PackedScene" uid="uid://c0sjm2t24o1t3" path="res://Objects/WorldRegions/LevelGate.tscn" id="10_4oy1d"]
@@ -566,6 +567,10 @@ mesh = SubResource("BoxMesh_7rvy5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="crusher2" unique_id=99074852]
 shape = SubResource("BoxShape3D_vy5do")
+
+[node name="WeaponPickup" parent="." unique_id=1666044394 instance=ExtResource("8_tlhpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.406097, 7.1844788, -1.4208794)
+weaponPath = "res://Weapons/SMG/SubmachineGun.tscn"
 
 [connection signal="interacted" from="Stage/MovingPlatform/InteractComponent" to="Stage/MovingPlatform" method="toggle"]
 [connection signal="interacted" from="Stage/makeAmmo/InteractComponent" to="Stage/makeAmmo/CopyEmitter" method="emit"]
