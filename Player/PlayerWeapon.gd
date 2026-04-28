@@ -96,6 +96,8 @@ func _addWeapon(weaponScenePath: String):
 	weaponsList.sort_custom(compareWeaponPrefSlot)
 			
 	setHeld(weaponsList.find(newWeapon))
+	if GameData.debugInfo:
+		print("Debug: Weapon added, " + str(newWeapon))
 
 func compareWeaponPrefSlot(a: WeaponBase, b: WeaponBase):
 	if a.prefWeaponSlot < b.prefWeaponSlot:
