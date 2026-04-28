@@ -8,6 +8,7 @@ enum AMMOTYPE {NONE, PISTOL, SMG, GRENADE}
 @export var weaponName: String
 @export var myAmmoType: AMMOTYPE;
 @export var type: WEAPONTYPE;
+@export var prefWeaponSlot: int = -1; ## Uses this to order weapons when picked up
 @export var damage: int;
 @export var attackSpeed: float;
 @export var maxAmmo: int = 0;

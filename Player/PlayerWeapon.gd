@@ -65,6 +65,8 @@ func _input(event: InputEvent) -> void:
 func setHeld(newIndex: int):
 	if newIndex >= weaponsList.size():
 		return;
+	if weaponsList.get(heldWeapon) == null:
+		return;
 	
 	weaponsList.get(heldWeapon).visible = false;
 	weaponsList.get(heldWeapon)._switchedFrom();
@@ -72,12 +74,13 @@ func setHeld(newIndex: int):
 	weaponsList.get(heldWeapon).visible = true;
 	weaponsList.get(heldWeapon)._switchTo();
 
+
 func _addWeapon(weaponScenePath: String):
 	var newWeapon = load(weaponScenePath).instantiate()
 	
 	## check if palyer has weapon
 	for weapon in weaponsList:
-		if weapon.name == newWeapon.name: # if not add ammo
+		if weapon != null and weapon.name == newWeapon.name: # if not add ammo
 			newWeapon.queue_free()
 			weapon.addAmmo(100)
 			return;
@@ -85,8 +88,19 @@ func _addWeapon(weaponScenePath: String):
 	## add weapon
 	newWeapon.visible = false;
 	add_child(newWeapon)
+	newWeapon.addAmmo(100)
+
 	weaponsList.push_back(newWeapon)
+
+	## sort list
+	weaponsList.sort_custom(compareWeaponPrefSlot)
+			
 	setHeld(weaponsList.find(newWeapon))
+
+func compareWeaponPrefSlot(a: WeaponBase, b: WeaponBase):
+	if a.prefWeaponSlot < b.prefWeaponSlot:
+		return true;
+	return false;
 
 func _addAmmo(type: WeaponBase.AMMOTYPE, ammount: int) -> int:
 	var remainder = ammount;

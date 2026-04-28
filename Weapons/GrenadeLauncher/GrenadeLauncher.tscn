@@ -21,6 +21,7 @@ script = ExtResource("1_cb41u")
 weaponName = "Grenade Launcher"
 myAmmoType = 3
 type = 2
+prefWeaponSlot = 3
 attackSpeed = 1.0
 maxAmmo = 20
 metadata/_custom_type_script = "uid://b6bqtm7u8pqy4"

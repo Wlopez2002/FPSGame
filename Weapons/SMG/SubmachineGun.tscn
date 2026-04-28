@@ -20,6 +20,7 @@ script = ExtResource("1_mylev")
 weaponName = "Submachine Gun"
 myAmmoType = 2
 type = 1
+prefWeaponSlot = 2
 damage = 1
 attackSpeed = 0.1
 maxAmmo = 40

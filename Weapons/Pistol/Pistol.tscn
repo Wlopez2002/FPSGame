@@ -16,6 +16,7 @@ script = ExtResource("1_wl3ew")
 weaponName = "Pistol"
 myAmmoType = 1
 type = 1
+prefWeaponSlot = 1
 damage = 1
 attackSpeed = 0.5
 maxAmmo = 20

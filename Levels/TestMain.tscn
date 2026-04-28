@@ -568,7 +568,19 @@ mesh = SubResource("BoxMesh_7rvy5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="crusher2" unique_id=99074852]
 shape = SubResource("BoxShape3D_vy5do")
 
-[node name="WeaponPickup" parent="." unique_id=1666044394 instance=ExtResource("8_tlhpo")]
+[node name="WeaponPickup3" parent="." unique_id=1666044394 instance=ExtResource("8_tlhpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.05553, 14.59, 37.338078)
+weaponPath = "res://Weapons/GrenadeLauncher/GrenadeLauncher.tscn"
+
+[node name="WeaponPickup2" parent="." unique_id=1705449975 instance=ExtResource("8_tlhpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4167557, 0.7081709, -10.771573)
+weaponPath = "res://Weapons/Pistol/Pistol.tscn"
+
+[node name="WeaponPickup4" parent="." unique_id=403812938 instance=ExtResource("8_tlhpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.39567, 7.1844797, -14.920078)
+weaponPath = "res://Weapons/SMG/SubmachineGun.tscn"
+
+[node name="WeaponPickup" parent="." unique_id=2055603131 instance=ExtResource("8_tlhpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.406097, 7.1844788, -1.4208794)
 weaponPath = "res://Weapons/SMG/SubmachineGun.tscn"
 

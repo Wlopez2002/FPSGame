@@ -75,6 +75,7 @@ size = Vector3(2, 1.387085, 3)
 [node name="SledgehammerWeapon" type="Node3D" unique_id=1840920180]
 script = ExtResource("1_bpkrq")
 weaponName = "Sledgehammer"
+prefWeaponSlot = 0
 damage = 5
 attackSpeed = 1.0
 

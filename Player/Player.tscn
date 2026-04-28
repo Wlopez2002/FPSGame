@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cybl126oyo3x0" path="res://UI/PlayerUi.tscn" id="2_q3lat"]
 [ext_resource type="Script" uid="uid://buj4lbe30m4dx" path="res://Player/PlayerWeapon.gd" id="2_tok1r"]
 [ext_resource type="PackedScene" uid="uid://b2i8nqbfc1bsq" path="res://Weapons/Sledgehammer/SledgehammerWeapon.tscn" id="4_8g4oa"]
-[ext_resource type="PackedScene" uid="uid://b7owd76wwuk2f" path="res://Weapons/Pistol/Pistol.tscn" id="5_6ysni"]
-[ext_resource type="PackedScene" uid="uid://3lsl5ugt2sap" path="res://Weapons/GrenadeLauncher/GrenadeLauncher.tscn" id="5_dm7nj"]
 [ext_resource type="Script" uid="uid://d0if5v7xkdr0k" path="res://Player/PlayerInteract.gd" id="6_8sa4y"]
 [ext_resource type="Script" uid="uid://dqm0n2x300ibf" path="res://Player/PlayerHitBox.gd" id="7_s1rgi"]
 [ext_resource type="PackedScene" uid="uid://cgvvmyrm706bt" path="res://Conponents/EntityComponent.tscn" id="8_s1rgi"]
@@ -45,15 +43,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Weapons" type="Node3D" parent="Head" unique_id=237730863 node_paths=PackedStringArray("weaponsList")]
 script = ExtResource("2_tok1r")
-weaponsList = [NodePath("SledgehammerWeapon"), NodePath("Pistol"), NodePath("GrenadeLauncher")]
+weaponsList = [NodePath("SledgehammerWeapon")]
 
 [node name="SledgehammerWeapon" parent="Head/Weapons" unique_id=1840920180 instance=ExtResource("4_8g4oa")]
-visible = false
-
-[node name="Pistol" parent="Head/Weapons" unique_id=1000285267 instance=ExtResource("5_6ysni")]
-visible = false
-
-[node name="GrenadeLauncher" parent="Head/Weapons" unique_id=1248248290 instance=ExtResource("5_dm7nj")]
 visible = false
 
 [node name="switchTimer" type="Timer" parent="Head/Weapons" unique_id=880121823]
