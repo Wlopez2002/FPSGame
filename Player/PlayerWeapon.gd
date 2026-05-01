@@ -94,7 +94,9 @@ func _addWeapon(weaponScenePath: String):
 
 	## sort list
 	weaponsList.sort_custom(compareWeaponPrefSlot)
-			
+	
+	for weapon in weaponsList: ## TODO: sometimes setHeld() doesn't properly hide weapons when another is picked up
+		weapon.visible = false;
 	setHeld(weaponsList.find(newWeapon))
 	if GameData.debugInfo:
 		print("Debug: Weapon added, " + str(newWeapon))
