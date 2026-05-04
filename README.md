@@ -8,9 +8,11 @@ TODO:
 	* Fix movement audio for sliding on moving platform and landing on vertical ones
 	* projectile and enemy speed in water
 	* more enemies
-	* ability to pickup new weapons
-	* more effects
+	* more visual effects
 	* better temp models
+	* immunity for a short time when dashing
+	* power ups
+	* weapon magazines
 
 ERRORS:
 	Error comes up when destroying a turret, I think it comes up when it also tries to create a bullet
