@@ -38,8 +38,8 @@ func _physics_process(_delta: float) -> void:
 			maintainHeight()
 		AiModes.PERSUE:
 			velocity = global_position.direction_to(player.global_position) * SPEED
-			#maintainHeight()
-			
+			if Vector2(global_position.x,global_position.z).distance_to(Vector2(player.global_position.x,player.global_position.z)) > 10:
+				maintainHeight()
 			if Vector2(global_position.x,global_position.z).distance_to(Vector2(player.global_position.x,player.global_position.z)) < 5:
 				aiMode = AiModes.DASH
 		AiModes.DASH:
