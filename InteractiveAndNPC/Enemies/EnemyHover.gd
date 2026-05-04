@@ -3,8 +3,9 @@ extends CharacterBody3D
 enum AiModes {WANDER, PERSUE, DASH}
 
 @onready var floorFinder = $FloorFinder;
-@onready var head = $head;
 @onready var dashTimer = $DashTimer;
+@onready var attackTimer = $attackTimer;
+@onready var enemyAttack = $enemyAttack;
 
 const SPEED = 10.0
 
@@ -23,6 +24,10 @@ func _physics_process(_delta: float) -> void:
 		player = get_tree().get_first_node_in_group("Player");
 		return;
 	
+	## above 1 as the hitbox is inside enemy attack area
+	if enemyAttack.get_overlapping_areas().size() > 1 and attackTimer.is_stopped():
+		_attack()
+	
 	match aiMode:
 		AiModes.WANDER:
 			if Vector2(global_position.x,global_position.z).distance_to(wanderTo) < 0.1:
@@ -32,9 +37,8 @@ func _physics_process(_delta: float) -> void:
 			velocity = global_position.direction_to(Vector3(wanderTo.x,global_position.y,wanderTo.y)) * SPEED
 			maintainHeight()
 		AiModes.PERSUE:
-			head.look_at(player.global_position)
 			velocity = global_position.direction_to(player.global_position) * SPEED
-			maintainHeight()
+			#maintainHeight()
 			
 			if Vector2(global_position.x,global_position.z).distance_to(Vector2(player.global_position.x,player.global_position.z)) < 5:
 				aiMode = AiModes.DASH
@@ -59,13 +63,21 @@ func maintainHeight():
 		velocity.y = 0;
 
 func _on_dash_timer_timeout() -> void:
-	print("end dash")
 	aiMode = AiModes.PERSUE
 
 func _on_player_detect_area_area_entered(_area: Area3D) -> void:
 	if aiMode == AiModes.WANDER:
 		aiMode = AiModes.PERSUE
 
+func _attack():
+	var myHitBox = $HitBox;
+	if attackTimer.is_stopped():
+		for area in enemyAttack.get_overlapping_areas():
+			if area is HitBox and (area != myHitBox):
+				var box: HitBox = area;
+				box._hit(5)
+				attackTimer.start(0.5)
+		
 func save():
 	var Entity: EntityComponent = $EntityComponent;
 	var saveDict = {

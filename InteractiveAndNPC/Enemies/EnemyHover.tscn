@@ -4,38 +4,40 @@
 [ext_resource type="PackedScene" uid="uid://ddsaee4vknn1u" path="res://Conponents/HitBox.tscn" id="2_0iim2"]
 [ext_resource type="PackedScene" uid="uid://cgvvmyrm706bt" path="res://Conponents/EntityComponent.tscn" id="3_ry756"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_kxkwm"]
-size = Vector3(0.75, 0.75, 0.75)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0iim2"]
+metallic = 0.54
+metallic_specular = 0.0
+roughness = 0.3
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dp6d2"]
-size = Vector3(0.75, 0.75, 0.75)
+[sub_resource type="SphereMesh" id="SphereMesh_0iim2"]
+material = SubResource("StandardMaterial3D_0iim2")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ry756"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qi4mb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0iim2"]
-radius = 20.0
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sjaai"]
+radius = 0.89205045
 
 [node name="EnemyHover" type="CharacterBody3D" unique_id=1225290110 groups=["Persistent"]]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_dp6d2")
 
-[node name="head" type="Node3D" parent="." unique_id=267165826]
-
-[node name="headRay" type="RayCast3D" parent="head" unique_id=1846994304]
-
-[node name="FloorFinder" type="RayCast3D" parent="." unique_id=576726677]
-target_position = Vector3(0, -100, 0)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=557537991]
-mesh = SubResource("BoxMesh_kxkwm")
+mesh = SubResource("SphereMesh_0iim2")
 
 [node name="Body" type="CollisionShape3D" parent="." unique_id=1586999115]
-shape = SubResource("BoxShape3D_dp6d2")
+shape = SubResource("SphereShape3D_ry756")
 
 [node name="HitBox" parent="." unique_id=1855202522 instance=ExtResource("2_0iim2")]
 collision_layer = 32
 
 [node name="Body" type="CollisionShape3D" parent="HitBox" unique_id=1011910176]
-shape = SubResource("BoxShape3D_dp6d2")
+shape = SubResource("SphereShape3D_qi4mb")
 
 [node name="EntityComponent" parent="." unique_id=1377202246 node_paths=PackedStringArray("nodeToFreeOnKill") instance=ExtResource("3_ry756")]
 health = 1
@@ -51,6 +53,19 @@ shape = SubResource("SphereShape3D_0iim2")
 
 [node name="DashTimer" type="Timer" parent="." unique_id=2089240652]
 one_shot = true
+
+[node name="enemyAttack" type="Area3D" parent="." unique_id=1688194221]
+collision_layer = 0
+collision_mask = 48
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemyAttack" unique_id=1875522050]
+shape = SubResource("SphereShape3D_sjaai")
+
+[node name="attackTimer" type="Timer" parent="." unique_id=616414258]
+one_shot = true
+
+[node name="FloorFinder" type="RayCast3D" parent="." unique_id=326314167]
+target_position = Vector3(0, -20, 0)
 
 [connection signal="HitSignal" from="HitBox" to="EntityComponent" method="_damage"]
 [connection signal="area_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_area_entered"]

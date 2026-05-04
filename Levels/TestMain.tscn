@@ -586,9 +586,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.406097, 7.1844788, -1.420
 weaponPath = "res://Weapons/SMG/SubmachineGun.tscn"
 
 [node name="EnemyHover" parent="." unique_id=1225290110 instance=ExtResource("20_f4ln3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.679867, 0.58317566, 20.904112)
-hoverDistance = 4.0
-hoverError = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7395859, 13.163479, 38.213345)
 
 [connection signal="interacted" from="Stage/MovingPlatform/InteractComponent" to="Stage/MovingPlatform" method="toggle"]
 [connection signal="interacted" from="Stage/makeAmmo/InteractComponent" to="Stage/makeAmmo/CopyEmitter" method="emit"]
