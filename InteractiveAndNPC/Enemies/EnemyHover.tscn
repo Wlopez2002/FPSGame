@@ -26,6 +26,7 @@ radius = 0.89205045
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_dp6d2")
+hoverError = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=557537991]
 mesh = SubResource("SphereMesh_0iim2")
