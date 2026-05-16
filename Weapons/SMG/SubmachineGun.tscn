@@ -5,14 +5,14 @@
 [ext_resource type="AudioStream" uid="uid://cfji0jbnyhxgo" path="res://Resources/Sounds/WeaponSounds/SMG/smgshot.wav" id="4_mylev"]
 [ext_resource type="PackedScene" uid="uid://dlfm0q6qu5paa" path="res://Resources/Effects/HitScanBulletShot.tscn" id="4_qgxe7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mylev"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rq64q"]
-material = SubResource("StandardMaterial3D_wl3ew")
+material = SubResource("StandardMaterial3D_mylev")
 size = Vector3(0.2, 0.2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mylev"]
-material = SubResource("StandardMaterial3D_wl3ew")
+material = SubResource("StandardMaterial3D_mylev")
 size = Vector3(0.2, 0.2, 0.23)
 
 [node name="SubmachineGun" type="Node3D" unique_id=1672506506]
@@ -20,7 +20,7 @@ script = ExtResource("1_mylev")
 weaponName = "Submachine Gun"
 myAmmoType = 2
 type = 1
-prefWeaponSlot = 2
+prefWeaponSlot = 3
 damage = 1
 attackSpeed = 0.1
 maxAmmo = 40
