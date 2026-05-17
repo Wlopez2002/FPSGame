@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cl3vi0beydejx"]
+
+[ext_resource type="Script" uid="uid://b65hioom02413" path="res://Weapons/Shotgun/Shotgun.gd" id="1_tqfqr"]
+[ext_resource type="AudioStream" uid="uid://vp22mbf7clmw" path="res://Resources/Sounds/WeaponSounds/Pistol/674568__sertonin__9mm-handgun-being-dry-fired.wav" id="2_x3vbk"]
+[ext_resource type="AudioStream" uid="uid://bl7vqy2fdflhc" path="res://Resources/Sounds/WeaponSounds/Pistol/427592__michorvath__9mm-pistol-shot.wav" id="3_3ycso"]
+[ext_resource type="PackedScene" uid="uid://dlfm0q6qu5paa" path="res://Resources/Effects/HitScanBulletShot.tscn" id="4_3ycso"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl3ew"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mhv35"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tqfqr"]
+material = SubResource("StandardMaterial3D_wl3ew")
+size = Vector3(0.2, 0.2, 0.23)
+
+[sub_resource type="PrismMesh" id="PrismMesh_tqfqr"]
+size = Vector3(8, 1, 1)
+
+[node name="Shotgun" type="Node3D" unique_id=1586398384]
+script = ExtResource("1_tqfqr")
+weaponName = "Shotgun"
+myAmmoType = 4
+type = 1
+prefWeaponSlot = 2
+damage = 5
+attackSpeed = 0.75
+maxAmmo = 12
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1467763834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57035804, -0.25661874, -0.515957)
+mesh = SubResource("BoxMesh_mhv35")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=991477428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14318645, -0.12873197)
+mesh = SubResource("BoxMesh_tqfqr")
+
+[node name="AttackSpeedTimer" type="Timer" parent="." unique_id=876630009]
+
+[node name="hitArea" type="Area3D" parent="." unique_id=210300409]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="hitArea" unique_id=1793362835]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+depth = 2.0
+polygon = PackedVector2Array(-0.5, 0, 0.5, 0, 4, 20, -4, 20)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="hitArea" unique_id=813936822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.659939)
+mesh = SubResource("PrismMesh_tqfqr")
+
+[node name="WeaponSounds" type="Node3D" parent="." unique_id=1072426834]
+
+[node name="PistolClickPlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=817546330]
+stream = ExtResource("2_x3vbk")
+max_db = -2.0
+
+[node name="PistolFirePlayer" type="AudioStreamPlayer3D" parent="WeaponSounds" unique_id=747141102]
+stream = ExtResource("3_3ycso")
+volume_db = -10.0
+max_db = -4.0
+
+[node name="WeaponEffects" type="Node3D" parent="." unique_id=1850218878]
+
+[node name="HitScanBulletShot" parent="WeaponEffects" unique_id=1801671218 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot2" parent="WeaponEffects" unique_id=1294486184 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot3" parent="WeaponEffects" unique_id=1949547972 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot4" parent="WeaponEffects" unique_id=32425752 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot5" parent="WeaponEffects" unique_id=746402680 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot6" parent="WeaponEffects" unique_id=1735416017 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HitScanBulletShot7" parent="WeaponEffects" unique_id=219915530 instance=ExtResource("4_3ycso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[connection signal="timeout" from="AttackSpeedTimer" to="." method="_on_attack_speed_timer_timeout"]
